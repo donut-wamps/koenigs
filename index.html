@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Königs – Versicherungen</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Georgia', serif;
@@ -24,45 +20,27 @@
             padding: 2rem;
         }
 
-        .hero {
-            max-width: 680px;
-            width: 100%;
-        }
-
-        .crown {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
+        .crown { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
         h1 {
             font-size: clamp(2rem, 6vw, 3.2rem);
             font-weight: 700;
-            letter-spacing: 0.02em;
             color: #f0ece4;
             margin-bottom: 0.6rem;
             line-height: 1.2;
         }
 
-        h1 span {
-            color: #c9a84c;
-        }
+        h1 span { color: #c9a84c; }
 
         .subtitle {
             font-family: 'Arial', sans-serif;
             font-size: clamp(1rem, 3vw, 1.2rem);
             color: #b0a899;
-            font-weight: 400;
             margin-bottom: 3rem;
             line-height: 1.5;
         }
 
-        .buttons {
-            display: flex;
-            gap: 1.2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .buttons { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
 
         .btn {
             display: inline-block;
@@ -77,102 +55,149 @@
             letter-spacing: 0.03em;
         }
 
-        .btn-primary {
-            background-color: #c9a84c;
-            color: #0d1b2a;
-            border: 2px solid #c9a84c;
-        }
+        .btn-primary { background-color: #c9a84c; color: #0d1b2a; border: 2px solid #c9a84c; }
+        .btn-primary:hover { background-color: #e0c06a; border-color: #e0c06a; }
+        .btn-secondary { background-color: transparent; color: #f0ece4; border: 2px solid #f0ece4; }
+        .btn-secondary:hover { background-color: #f0ece4; color: #0d1b2a; }
 
-        .btn-primary:hover {
-            background-color: #e0c06a;
-            border-color: #e0c06a;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #f0ece4;
-            border: 2px solid #f0ece4;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f0ece4;
-            color: #0d1b2a;
-        }
-
-        <section id="formular" style="display:none; margin-top: 3rem; width: 100%; max-width: 680px;">
-            <div id="frage1">
-                <h2 style="font-size: 1.8rem; color: #c9a84c; margin-bottom: 1rem;">Wie alt sind Sie?</h2>
-                <input id="alter-input" type="number" min="1" max="120" placeholder="Ihr Alter eingeben..."
-                    style="font-size: 1.1rem; padding: 0.7rem 1.2rem; border-radius: 4px; border: 2px solid #c9a84c; background: #0d1b2a; color: #f0ece4; width: 220px; text-align: center; outline: none;">
-                <br><br>
-                <button onclick="zeigeFrage2()" class="btn btn-primary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #c9a84c; background: #c9a84c; color: #0d1b2a; cursor: pointer;">Weiter</button>
-            </div>
-
-            <div id="frage2" style="display:none;">
-                <h2 style="font-size: 1.8rem; color: #c9a84c; margin-bottom: 1rem;">Was möchten Sie versichern?</h2>
-                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-                    <button onclick="waehleVersicherung('Auto')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">🚗 Auto</button>
-                    <button onclick="waehleVersicherung('Haus')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">🏠 Haus</button>
-                    <button onclick="waehleVersicherung('Leben')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">❤️ Leben</button>
-                    <button onclick="waehleVersicherung('Gesundheit')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">🏥 Gesundheit</button>
-                </div>
-            </div>
-        </section>
-
-        <script>
-            // Formular anzeigen wenn auf Knopf geklickt
-            document.querySelector('a[href*="#formular"]').addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('formular').style.display = 'block';
-                document.querySelector('.hero h1').style.display = 'none';
-                document.querySelector('.hero .subtitle').style.display = 'none';
-                document.querySelector('.hero .buttons').style.display = 'none';
-                document.querySelector('.crown').style.display = 'none';
-            });
-
-            // Enter-Taste bei Alter
-            document.getElementById('alter-input').addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') zeigeFrage2();
-            });
-
-            function zeigeFrage2() {
-                const alter = document.getElementById('alter-input').value;
-                if (!alter || alter < 1 || alter > 120) {
-                    alert('Bitte geben Sie ein gültiges Alter ein.');
-                    return;
-                }
-                document.getElementById('frage1').style.display = 'none';
-                document.getElementById('frage2').style.display = 'block';
-            }
-
-            function waehleVersicherung(typ) {
-                alert('Sie haben ' + typ + ' gewählt! Wir melden uns bald bei Ihnen.');
-            }
-        </script>footer {
+        footer {
             position: fixed;
             bottom: 1.2rem;
             font-family: 'Arial', sans-serif;
             font-size: 0.8rem;
             color: #5a5650;
         }
+
+        /* Formular */
+        #formular-bereich {
+            display: none;
+            max-width: 680px;
+            width: 100%;
+        }
+
+        #formular-bereich h2 {
+            font-size: 1.8rem;
+            color: #c9a84c;
+            margin-bottom: 1.5rem;
+        }
+
+        #alter-input {
+            font-size: 1.1rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 4px;
+            border: 2px solid #c9a84c;
+            background: #0d1b2a;
+            color: #f0ece4;
+            width: 220px;
+            text-align: center;
+            outline: none;
+        }
+
+        .versicherung-knopf {
+            font-family: Arial;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            border: 2px solid #f0ece4;
+            background: transparent;
+            color: #f0ece4;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .versicherung-knopf:hover { background: #f0ece4; color: #0d1b2a; }
+
+        .zurueck {
+            margin-top: 2rem;
+            font-family: Arial;
+            font-size: 0.9rem;
+            color: #b0a899;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+        }
     </style>
 </head>
 <body>
 
-    <div class="hero">
+    <!-- Startseite -->
+    <div id="startseite">
         <span class="crown">♛</span>
         <h1>Willkommen bei <span>Königs</span></h1>
         <p class="subtitle">Hier können Sie in kurzer Zeit die richtigen Versicherungen bekommen.</p>
-
         <div class="buttons">
-            <a href="https://donut-wamps.github.io/koenigs/#formular" class="btn btn-primary">Formular / Umfrage</a>
-            <a href="https://donut-wamps.github.io/koenigs/#about-us" class="btn btn-secondary">About Us</a>
+            <a href="https://donut-wamps.github.io/koenigs/#formular" class="btn btn-primary" onclick="zeigeSeite('formular')">Formular / Umfrage</a>
+            <a href="https://donut-wamps.github.io/koenigs/#about-us" class="btn btn-secondary" onclick="zeigeSeite('about-us')">About Us</a>
         </div>
     </div>
 
-    <footer>
-        &copy; 2026 Königs. Alle Rechte vorbehalten.
-    </footer>
+    <!-- Formular -->
+    <div id="formular-bereich">
+
+        <div id="frage1">
+            <h2>Wie alt sind Sie?</h2>
+            <input id="alter-input" type="number" min="1" max="120" placeholder="Ihr Alter eingeben...">
+            <br><br>
+            <button class="btn btn-primary" onclick="zeigeFrage2()">Weiter →</button>
+        </div>
+
+        <div id="frage2" style="display:none;">
+            <h2>Was möchten Sie versichern?</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <button class="versicherung-knopf" onclick="waehleVersicherung('Auto')">🚗 Auto</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung('Haus')">🏠 Haus</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung('Leben')">❤️ Leben</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung('Gesundheit')">🏥 Gesundheit</button>
+            </div>
+        </div>
+
+        <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
+    </div>
+
+    <footer>&copy; 2026 Königs. Alle Rechte vorbehalten.</footer>
+
+    <script>
+        function zeigeSeite(seite) {
+            document.getElementById('startseite').style.display = 'none';
+            document.getElementById('formular-bereich').style.display = 'none';
+
+            if (seite === 'formular') {
+                document.getElementById('formular-bereich').style.display = 'block';
+                document.getElementById('frage1').style.display = 'block';
+                document.getElementById('frage2').style.display = 'none';
+            } else {
+                document.getElementById('startseite').style.display = 'block';
+            }
+        }
+
+        // Beim Laden der Seite Hash prüfen
+        window.addEventListener('load', function () {
+            if (window.location.hash === '#formular') {
+                zeigeSeite('formular');
+            }
+        });
+
+        // Enter-Taste bei Alter
+        document.getElementById('alter-input').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') zeigeFrage2();
+        });
+
+        function zeigeFrage2() {
+            const alter = document.getElementById('alter-input').value;
+            if (!alter || alter < 1 || alter > 120) {
+                alert('Bitte geben Sie ein gültiges Alter ein.');
+                return;
+            }
+            document.getElementById('frage1').style.display = 'none';
+            document.getElementById('frage2').style.display = 'block';
+        }
+
+        function waehleVersicherung(typ) {
+            alert('Sie haben ' + typ + ' gewählt! Wir melden uns bald bei Ihnen.');
+        }
+    </script>
 
 </body>
 </html>
