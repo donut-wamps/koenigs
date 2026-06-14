@@ -35,8 +35,6 @@ body {
   text-align: center;
 }
 
-.crown { font-size: 2.5rem; margin-bottom: 1rem; }
-
 .login-box h1 {
   font-family: Georgia, serif;
   color: #c9a84c;
@@ -64,9 +62,7 @@ body {
   outline: none;
 }
 
-.login-box input[type="password"]:focus {
-  border-color: #c9a84c;
-}
+.login-box input[type="password"]:focus { border-color: #c9a84c; }
 
 .btn-gold {
   width: 100%;
@@ -100,12 +96,7 @@ body {
 }
 
 .btn-google:hover { background: #f5f5f5; }
-
-.btn-google svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
+.btn-google svg { width: 20px; height: 20px; flex-shrink: 0; }
 
 .divider {
   display: flex;
@@ -144,7 +135,6 @@ header {
 .brand { display: flex; align-items: center; gap: 0.75rem; }
 .brand-name { font-family: Georgia, serif; color: #c9a84c; font-size: 1.1rem; }
 .badge { background: #1e3048; color: #b0a899; font-size: 0.72rem; padding: 3px 10px; border-radius: 99px; }
-
 .header-right { display: flex; align-items: center; gap: 0.75rem; }
 #user-info { color: #b0a899; font-size: 0.82rem; }
 
@@ -183,7 +173,6 @@ header {
 
 .btn-primary { background: #c9a84c; border-color: #c9a84c; color: #0d1b2a; font-weight: bold; }
 .btn-primary:hover { background: #e0c06a; border-color: #e0c06a; color: #0d1b2a; }
-
 .btn-danger { border-color: #e05c5c; color: #e05c5c; background: #132130; }
 .btn-danger:hover { background: rgba(224,92,92,0.1); }
 
@@ -201,12 +190,12 @@ td { padding: 11px 14px; border-bottom: 1px solid #1e3048; color: #f0ece4; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(255,255,255,0.03); }
 
-.badge-typ { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: bold; }
-.b-auto       { background: rgba(55,138,221,0.2);  color: #78c0ff; }
-.b-haus       { background: rgba(99,153,34,0.2);   color: #a3d96b; }
-.b-leben      { background: rgba(186,117,23,0.2);  color: #f5c96a; }
-.b-gesundheit { background: rgba(212,83,126,0.2);  color: #f09ac0; }
-.b-unbekannt  { background: rgba(176,168,153,0.15);color: #b0a899; }
+.vbadge { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: bold; }
+.vb-auto       { background: rgba(55,138,221,0.2);  color: #78c0ff; }
+.vb-haus       { background: rgba(99,153,34,0.2);   color: #a3d96b; }
+.vb-leben      { background: rgba(186,117,23,0.2);  color: #f5c96a; }
+.vb-gesundheit { background: rgba(212,83,126,0.2);  color: #f09ac0; }
+.vb-unbekannt  { background: rgba(176,168,153,0.15);color: #b0a899; }
 
 .del-btn { background: none; border: none; color: #5a5650; cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 4px; }
 .del-btn:hover { color: #e05c5c; background: rgba(224,92,92,0.1); }
@@ -223,9 +212,8 @@ tr:hover td { background: rgba(255,255,255,0.03); }
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="crown">&#9819;</div>
-    <h1>K&#246;nigs Versicherungen</h1>
-    <p>Interner Bereich &#8211; nur f&#252;r Mitarbeiter</p>
+    <h1>&#9819; VKF Admin</h1>
+    <p>Interner Bereich &#8211; nur für Mitarbeiter</p>
 
     <input type="password" id="pw-input" placeholder="Passwort" onkeydown="if(event.key==='Enter') loginPW()" />
     <button class="btn-gold" onclick="loginPW()">Einloggen</button>
@@ -238,7 +226,6 @@ tr:hover td { background: rgba(255,255,255,0.03); }
         <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
         <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
         <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-        <path fill="none" d="M0 0h48v48H0z"/>
       </svg>
       Mit Google anmelden
     </button>
@@ -264,7 +251,7 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <div class="stats-grid">
       <div class="stat-card"><div class="stat-label">Anfragen gesamt</div><div class="stat-value" id="stat-total">0</div></div>
       <div class="stat-card"><div class="stat-label">&#216; Budget</div><div class="stat-value" id="stat-avg">&#8211;</div></div>
-      <div class="stat-card"><div class="stat-label">H&#228;ufigste Versicherung</div><div class="stat-value" id="stat-top" style="font-size:1rem;padding-top:8px">&#8211;</div></div>
+      <div class="stat-card"><div class="stat-label">Häufigste Versicherung</div><div class="stat-value" id="stat-top" style="font-size:1rem;padding-top:8px">&#8211;</div></div>
       <div class="stat-card"><div class="stat-label">Letzter Abruf</div><div class="stat-value" id="stat-time" style="font-size:0.85rem;padding-top:8px;color:#b0a899">&#8211;</div></div>
     </div>
 
@@ -280,13 +267,7 @@ tr:hover td { background: rgba(255,255,255,0.03); }
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Alter</th>
-            <th>E-Mail</th>
-            <th>Versicherung</th>
-            <th>Budget</th>
-            <th>Datum</th>
-            <th></th>
+            <th>Name</th><th>Alter</th><th>E-Mail</th><th>Versicherung</th><th>Budget</th><th>Datum</th><th></th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -295,36 +276,32 @@ tr:hover td { background: rgba(255,255,255,0.03); }
       </table>
     </div>
 
-    <div class="footer">K&#246;nigs Versicherungen &#183; Interner Bereich &#183; Nur f&#252;r autorisierte Mitarbeiter</div>
+    <div class="footer">Königs Versicherungen &#183; Interner Bereich &#183; Nur für autorisierte Mitarbeiter</div>
   </div>
 </div>
 
 <script>
-var PASSWORD  = 'ADMIN';
-var CLIENT_ID = '373467087391-d1sld3ls39ph0nts8r8im10hv6hqumai.apps.googleusercontent.com';
-var SCOPE     = 'https://www.googleapis.com/auth/gmail.readonly';
+var PASSWORD    = 'ADMIN';
+var CLIENT_ID   = '373467087391-d1sld3ls39ph0nts8r8im10hv6hqumai.apps.googleusercontent.com';
+var GMAIL_SCOPE = 'https://www.googleapis.com/auth/gmail.readonly';
 
 var rows        = [];
 var scanning    = false;
 var accessToken = null;
 
-/* Google OAuth2 Popup */
 function startGoogleLogin() {
   var url = 'https://accounts.google.com/o/oauth2/v2/auth' +
     '?client_id=' + CLIENT_ID +
     '&redirect_uri=' + encodeURIComponent('https://donut-wamps.github.io/koenigs/admin.html') +
     '&response_type=token' +
-    '&scope=' + encodeURIComponent(SCOPE) +
+    '&scope=' + encodeURIComponent(GMAIL_SCOPE) +
     '&prompt=select_account';
 
   var popup = window.open(url, 'google-login', 'width=500,height=600,left=200,top=100');
 
   var timer = setInterval(function() {
     try {
-      if (popup.closed) {
-        clearInterval(timer);
-        return;
-      }
+      if (popup.closed) { clearInterval(timer); return; }
       var href = popup.location.href;
       if (href.indexOf('access_token') !== -1) {
         clearInterval(timer);
@@ -344,8 +321,7 @@ function startGoogleLogin() {
 }
 
 function loginPW() {
-  var val = document.getElementById('pw-input').value;
-  if (val === PASSWORD) {
+  if (document.getElementById('pw-input').value === PASSWORD) {
     document.getElementById('login-error').style.display = 'none';
     document.getElementById('user-info').textContent = 'Passwort-Login';
     openAdmin();
@@ -371,14 +347,10 @@ function logout() {
   document.getElementById('pw-input').value = '';
 }
 
-/* E-MAILS ABRUFEN */
+/* ── E-MAILS ABRUFEN ── */
 async function scanEmails() {
   if (scanning) return;
-
-  if (!accessToken) {
-    showStatus('Bitte zuerst mit Google anmelden.', 'error');
-    return;
-  }
+  if (!accessToken) { showStatus('Bitte zuerst mit Google anmelden.', 'error'); return; }
 
   scanning = true;
   var btn = document.getElementById('btn-scan');
@@ -387,43 +359,26 @@ async function scanEmails() {
   showStatus('Verbinde mit Gmail...', 'info');
 
   try {
-    var listRes = await fetch(
-      'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=50',
-      { headers: { 'Authorization': 'Bearer ' + accessToken } }
-    );
+    var listRes  = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=50', { headers: { 'Authorization': 'Bearer ' + accessToken } });
     var listData = await listRes.json();
 
     if (listData.error) throw new Error(listData.error.message);
-
-    if (!listData.messages || listData.messages.length === 0) {
-      showStatus('Keine E-Mails gefunden.', 'info');
-      return;
-    }
+    if (!listData.messages || listData.messages.length === 0) { showStatus('Keine E-Mails gefunden.', 'info'); return; }
 
     var newEntries = [];
-    var existing = new Set(rows.map(function(r) { return r.msgId; }));
+    var existing   = new Set(rows.map(function(r) { return r.msgId; }));
 
     for (var i = 0; i < Math.min(listData.messages.length, 30); i++) {
       var msgId = listData.messages[i].id;
       if (existing.has(msgId)) continue;
-
-      var msgRes = await fetch(
-        'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + msgId + '?format=full',
-        { headers: { 'Authorization': 'Bearer ' + accessToken } }
-      );
+      var msgRes  = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/' + msgId + '?format=full', { headers: { 'Authorization': 'Bearer ' + accessToken } });
       var msgData = await msgRes.json();
-      var entry = parseEmail(msgData, msgId);
+      var entry   = parseEmail(msgData, msgId);
       if (entry) newEntries.push(entry);
     }
 
     rows = rows.concat(newEntries);
-
-    if (newEntries.length === 0) {
-      showStatus('Alle E-Mails bereits in der Tabelle.', 'info');
-    } else {
-      showStatus('OK: ' + newEntries.length + ' neue E-Mail(s) eingetragen.', 'success');
-    }
-
+    showStatus(newEntries.length === 0 ? 'Alle E-Mails bereits in der Tabelle.' : 'OK: ' + newEntries.length + ' neue E-Mail(s) eingetragen.', newEntries.length === 0 ? 'info' : 'success');
     renderTable();
 
   } catch(err) {
@@ -435,17 +390,29 @@ async function scanEmails() {
   }
 }
 
-/* E-MAIL PARSEN */
+/* ── E-MAIL PARSEN ── */
+function decodeB64(str) {
+  try { return decodeURIComponent(escape(atob(str.replace(/-/g,'+').replace(/_/g,'/')))); }
+  catch(e) { try { return atob(str.replace(/-/g,'+').replace(/_/g,'/')); } catch(e2) { return ''; } }
+}
+
+function stripHtml(str) {
+  return str
+    .replace(/&#(\d+);/g, function(m,n) { return String.fromCharCode(parseInt(n)); })
+    .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&nbsp;/g,' ')
+    .replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+}
+
 function getBody(payload) {
   if (!payload) return '';
-  if (payload.body && payload.body.data) {
-    try { return atob(payload.body.data.replace(/-/g,'+').replace(/_/g,'/')); } catch(e) { return ''; }
-  }
+  if (payload.mimeType === 'text/plain' && payload.body && payload.body.data) return decodeB64(payload.body.data);
+  if (payload.mimeType === 'text/html'  && payload.body && payload.body.data) return stripHtml(decodeB64(payload.body.data));
+  if (payload.body && payload.body.data) return decodeB64(payload.body.data);
   if (payload.parts) {
     for (var i = 0; i < payload.parts.length; i++) {
-      var t = getBody(payload.parts[i]);
-      if (t) return t;
+      if (payload.parts[i].mimeType === 'text/plain') { var t = getBody(payload.parts[i]); if (t) return t; }
     }
+    for (var j = 0; j < payload.parts.length; j++) { var t2 = getBody(payload.parts[j]); if (t2) return t2; }
   }
   return '';
 }
@@ -453,146 +420,121 @@ function getBody(payload) {
 function grab(text, patterns) {
   for (var i = 0; i < patterns.length; i++) {
     var m = text.match(patterns[i]);
-    if (m && m[1]) return m[1].trim().replace(/<[^>]+>/g,'');
+    if (m && m[1]) return stripHtml(m[1]).trim();
   }
   return '';
 }
 
 function parseEmail(msgData, msgId) {
   var headers = msgData.payload.headers || [];
-  var subject = '';
-  var date    = '';
-  var fromHdr = '';
-
+  var subject = '', date = '', from = '';
   for (var i = 0; i < headers.length; i++) {
     if (headers[i].name === 'Subject') subject = headers[i].value;
     if (headers[i].name === 'Date')    date    = headers[i].value;
-    if (headers[i].name === 'From')    fromHdr = headers[i].value;
+    if (headers[i].name === 'From')    from    = headers[i].value;
   }
 
   var body = getBody(msgData.payload);
-  var full = subject + '\n' + body;
+  var full = stripHtml(subject) + '\n' + body;
 
-  /* Name aus E-Mail-Header falls nicht im Body */
-  var name = grab(full, [
-    /Name[:\s]+([^\n\r,<]{2,40})/i,
-    /Kunde[:\s]+([^\n\r,<]{2,40})/i,
-    /Vorname[:\s]+([^\n\r,<]{2,20})/i
-  ]);
+  /* Name: Vorname + Nachname aus EmailJS-Template */
+  var vorname  = grab(full, [/Vorname[:\s|]+([^\n\r|,<]{1,30})/i]);
+  var nachname = grab(full, [/Nachname[:\s|]+([^\n\r|,<]{1,30})/i]);
+  var name = '';
+  if (vorname && nachname) {
+    name = vorname + ' ' + nachname;
+  } else {
+    name = grab(full, [/Name[:\s|]+([^\n\r|,<]{2,40})/i, /Kunde[:\s|]+([^\n\r|,<]{2,40})/i]);
+  }
+  if (!name) name = from.split('<')[0].replace(/"/g,'').trim() || '?';
 
-  /* Vorname + Nachname kombinieren falls vorhanden */
-  var vorname  = grab(full, [/Vorname[:\s]+([^\n\r,<]{2,20})/i]);
-  var nachname = grab(full, [/Nachname[:\s]+([^\n\r,<]{2,20})/i]);
-  if (vorname && nachname) name = vorname + ' ' + nachname;
-
-  var alter = grab(full, [
-    /Alter[:\s]+(\d+)/i,
-    /(\d+)\s*Jahre/i
-  ]);
+  var alter = grab(full, [/Alter[:\s|]+(\d{1,3})/i, /(\d{1,3})\s*Jahre/i]);
 
   var email = grab(full, [
-    /E-Mail[:\s]+([\w.+%-]+@[\w.-]+\.\w+)/i,
-    /Email[:\s]+([\w.+%-]+@[\w.-]+\.\w+)/i,
+    /E-Mail[:\s|]+([\w.+%-]+@[\w.-]+\.\w+)/i,
+    /Email[:\s|]+([\w.+%-]+@[\w.-]+\.\w+)/i,
     /([\w.+%-]+@[\w.-]+\.\w+)/
   ]);
 
   var versicherung = grab(full, [
-    /Versicherung(?:styp)?[:\s]+(Auto|Haus|Leben|Gesundheit)/i,
+    /Versicherung(?:styp)?[:\s|]+(Auto|Haus|Leben|Gesundheit)/i,
     /\b(Auto|Haus|Leben|Gesundheit)versicherung\b/i,
-    /versichern[:\s]+(Auto|Haus|Leben|Gesundheit)/i
+    /versichern[:\s|]+(Auto|Haus|Leben|Gesundheit)/i,
+    /\b(Auto|Haus|Leben|Gesundheit)\b/i
   ]);
 
-  var budget = grab(full, [
-    /Budget[:\s]+(\d+)/i,
-    /(\d+)\s*&#8364;/i,
-    /(\d+)\s*Euro/i,
-    /(\d+)\s*EUR/i
-  ]);
+  var budgetZahl = grab(full, [/Budget[:\s|]+(\d+)/i, /(\d+)\s*\u20ac/, /(\d+)\s*Euro/i, /(\d+)\s*EUR/i]);
+  var budget = budgetZahl ? budgetZahl + ' \u20ac' : '';
 
   var datum = '';
   try {
     var d = new Date(date);
-    datum = d.toLocaleDateString('de-DE') + ' ' +
-            d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+    datum = d.toLocaleDateString('de-DE') + ' ' + d.toLocaleTimeString('de-DE', {hour:'2-digit',minute:'2-digit'});
   } catch(e) { datum = date.slice(0,16); }
 
-  return {
-    msgId:        msgId,
-    name:         name || fromHdr.split('<')[0].trim() || '?',
-    alter:        alter,
-    email:        email,
-    versicherung: versicherung,
-    budget:       budget,
-    datum:        datum,
-    betreff:      subject
-  };
+  return { msgId: msgId, name: name, alter: alter, email: email, versicherung: versicherung, budget: budget, datum: datum, betreff: stripHtml(subject) };
 }
 
-/* TABELLE */
-function badge(v) {
-  var map = { 'auto':'b-auto','haus':'b-haus','leben':'b-leben','gesundheit':'b-gesundheit' };
+/* ── TABELLE ── */
+function vbadge(v) {
+  var map = {'auto':'vb-auto','haus':'vb-haus','leben':'vb-leben','gesundheit':'vb-gesundheit'};
   var key = (v||'').toLowerCase().trim();
-  var cls = map[key] || 'b-unbekannt';
-  return '<span class="badge-typ ' + cls + '">' + (v||'?') + '</span>';
+  return '<span class="vbadge ' + (map[key]||'vb-unbekannt') + '">' + (v||'?') + '</span>';
 }
 
 function renderTable() {
-  var tbody     = document.getElementById('table-body');
-  var exportBtn = document.getElementById('btn-export');
-  var clearBtn  = document.getElementById('btn-clear');
+  var tbody = document.getElementById('table-body');
+  var exp   = document.getElementById('btn-export');
+  var clr   = document.getElementById('btn-clear');
 
   if (rows.length === 0) {
     tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">&#128139;</div>Noch keine Daten</div></td></tr>';
-    exportBtn.disabled = true;
-    clearBtn.disabled  = true;
-    updateStats();
-    return;
+    exp.disabled = clr.disabled = true;
+    updateStats(); return;
   }
 
-  exportBtn.disabled = false;
-  clearBtn.disabled  = false;
+  exp.disabled = clr.disabled = false;
 
-  var html = '';
-  for (var i = 0; i < rows.length; i++) {
-    var r = rows[i];
-    html += '<tr>' +
+  tbody.innerHTML = rows.map(function(r, i) {
+    return '<tr>' +
       '<td>' + (r.name||'&#8211;') + '</td>' +
       '<td>' + (r.alter||'&#8211;') + '</td>' +
       '<td style="font-size:0.8rem;color:#b0a899">' + (r.email||r.betreff||'&#8211;') + '</td>' +
-      '<td>' + badge(r.versicherung) + '</td>' +
-      '<td>' + (r.budget ? r.budget+' &#8364;' : '&#8211;') + '</td>' +
+      '<td>' + vbadge(r.versicherung) + '</td>' +
+      '<td>' + (r.budget||'&#8211;') + '</td>' +
       '<td style="font-size:0.78rem;color:#b0a899">' + (r.datum||'&#8211;') + '</td>' +
       '<td><button class="del-btn" onclick="deleteRow(' + i + ')">&#10005;</button></td>' +
       '</tr>';
-  }
-  tbody.innerHTML = html;
+  }).join('');
+
   updateStats();
 }
 
 function updateStats() {
   document.getElementById('stat-total').textContent = rows.length;
-  var budgets = rows.map(function(r){return parseFloat(r.budget);}).filter(function(n){return !isNaN(n);});
+
+  var budgets = rows.map(function(r) { return parseFloat((r.budget||'').replace(/[^\d.]/g,'')); }).filter(function(n) { return !isNaN(n) && n > 0; });
   document.getElementById('stat-avg').textContent = budgets.length
-    ? Math.round(budgets.reduce(function(a,b){return a+b;},0)/budgets.length)+'&#8364;' : '&#8211;';
+    ? Math.round(budgets.reduce(function(a,b){return a+b;},0)/budgets.length) + ' \u20ac' : '&#8211;';
+
   var counts = {};
-  rows.forEach(function(r){ var v=r.versicherung||'?'; counts[v]=(counts[v]||0)+1; });
+  rows.forEach(function(r) { var v = r.versicherung||'?'; counts[v]=(counts[v]||0)+1; });
   var top = Object.entries(counts).sort(function(a,b){return b[1]-a[1];})[0];
   document.getElementById('stat-top').textContent = top ? top[0] : '&#8211;';
+
   var now = new Date();
   document.getElementById('stat-time').textContent =
-    now.toLocaleDateString('de-DE')+' '+now.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+    now.toLocaleDateString('de-DE') + ' ' + now.toLocaleTimeString('de-DE', {hour:'2-digit',minute:'2-digit'});
 }
 
 function deleteRow(i) {
-  if (!confirm('Eintrag l&#246;schen?')) return;
-  rows.splice(i,1);
-  renderTable();
+  if (!confirm('Eintrag löschen?')) return;
+  rows.splice(i,1); renderTable();
 }
 
 function clearAll() {
-  if (!confirm('Alle Eintr&#228;ge l&#246;schen?')) return;
-  rows = [];
-  renderTable();
+  if (!confirm('Alle Einträge löschen?')) return;
+  rows = []; renderTable();
   document.getElementById('status-bar').style.display = 'none';
 }
 
@@ -606,17 +548,14 @@ function exportCSV() {
   var lines = ['Name,Alter,E-Mail,Versicherung,Budget,Datum,Betreff'];
   rows.forEach(function(r) {
     lines.push([r.name,r.alter,r.email,r.versicherung,r.budget,r.datum,r.betreff]
-      .map(function(v){ return '"'+(v||'').replace(/"/g,'""')+'"'; }).join(','));
+      .map(function(v){return '"'+(v||'').replace(/"/g,'""')+'"';}).join(','));
   });
   var blob = new Blob(['\uFEFF'+lines.join('\n')], {type:'text/csv;charset=utf-8;'});
   var url  = URL.createObjectURL(blob);
   var a    = document.createElement('a');
-  a.href   = url;
-  a.download = 'koenigs-anfragen.csv';
-  a.click();
+  a.href=url; a.download='koenigs-anfragen.csv'; a.click();
   URL.revokeObjectURL(url);
 }
 </script>
-
 </body>
 </html>
