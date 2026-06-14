@@ -378,7 +378,6 @@
             <button class="btn btn-primary" onclick="zeigeBestaetigung()">Weiter →</button>
         </div>
 
-        <!-- Bestätigung -->
         <div id="bestaetigung">
             <h2>Sind Ihre Daten richtig?</h2>
             <div class="daten-tabelle">
@@ -394,7 +393,6 @@
             </div>
         </div>
 
-        <!-- Abschluss -->
         <div id="abschluss">
             <div class="checkmark">✅</div>
             <h2>Vielen Dank, <span id="abschluss-name"></span>!</h2>
@@ -538,18 +536,26 @@
 
         function emailSenden(daten) {
             const statusEl = document.getElementById('status-email');
+
+            const csvZeile = daten.name + ',' + daten.alter + ',' + daten.email + ',' + daten.budget + ',' + daten.versicherung;
+
+            const jetzt = new Date();
+            const datum = jetzt.toLocaleDateString('de-DE') + ' ' + jetzt.toLocaleTimeString('de-DE');
+
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 name:         daten.name,
                 alter:        daten.alter,
                 email:        daten.email,
                 versicherung: daten.versicherung,
-                budget:       daten.budget
+                budget:       daten.budget,
+                csv_zeile:    csvZeile,
+                datum:        datum
             }).then(function() {
                 statusEl.innerText = '📧 E-Mail wurde an formullarkoenig@gmail.com gesendet.';
                 statusEl.className = 'status-nachricht status-ok';
                 statusEl.style.display = 'block';
             }, function() {
-                statusEl.innerText = '⚠️ E-Mail konnte nicht gesendet werden. Bitte EmailJS prüfen.';
+                statusEl.innerText = '⚠️ E-Mail konnte nicht gesendet werden.';
                 statusEl.className = 'status-nachricht status-fehler';
                 statusEl.style.display = 'block';
             });
