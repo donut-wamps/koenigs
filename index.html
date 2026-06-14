@@ -99,7 +99,56 @@
             color: #0d1b2a;
         }
 
-        footer {
+        <section id="formular" style="display:none; margin-top: 3rem; width: 100%; max-width: 680px;">
+            <div id="frage1">
+                <h2 style="font-size: 1.8rem; color: #c9a84c; margin-bottom: 1rem;">Wie alt sind Sie?</h2>
+                <input id="alter-input" type="number" min="1" max="120" placeholder="Ihr Alter eingeben..."
+                    style="font-size: 1.1rem; padding: 0.7rem 1.2rem; border-radius: 4px; border: 2px solid #c9a84c; background: #0d1b2a; color: #f0ece4; width: 220px; text-align: center; outline: none;">
+                <br><br>
+                <button onclick="zeigeFrage2()" class="btn btn-primary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #c9a84c; background: #c9a84c; color: #0d1b2a; cursor: pointer;">Weiter</button>
+            </div>
+
+            <div id="frage2" style="display:none;">
+                <h2 style="font-size: 1.8rem; color: #c9a84c; margin-bottom: 1rem;">Was möchten Sie versichern?</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <button onclick="waehleVersicherung('Auto')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">🚗 Auto</button>
+                    <button onclick="waehleVersicherung('Haus')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">🏠 Haus</button>
+                    <button onclick="waehleVersicherung('Leben')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">❤️ Leben</button>
+                    <button onclick="waehleVersicherung('Gesundheit')" class="btn btn-secondary" style="font-family: Arial; font-size: 1.1rem; font-weight: 600; padding: 0.9rem 2.2rem; border-radius: 4px; border: 2px solid #f0ece4; background: transparent; color: #f0ece4; cursor: pointer;">🏥 Gesundheit</button>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            // Formular anzeigen wenn auf Knopf geklickt
+            document.querySelector('a[href*="#formular"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('formular').style.display = 'block';
+                document.querySelector('.hero h1').style.display = 'none';
+                document.querySelector('.hero .subtitle').style.display = 'none';
+                document.querySelector('.hero .buttons').style.display = 'none';
+                document.querySelector('.crown').style.display = 'none';
+            });
+
+            // Enter-Taste bei Alter
+            document.getElementById('alter-input').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') zeigeFrage2();
+            });
+
+            function zeigeFrage2() {
+                const alter = document.getElementById('alter-input').value;
+                if (!alter || alter < 1 || alter > 120) {
+                    alert('Bitte geben Sie ein gültiges Alter ein.');
+                    return;
+                }
+                document.getElementById('frage1').style.display = 'none';
+                document.getElementById('frage2').style.display = 'block';
+            }
+
+            function waehleVersicherung(typ) {
+                alert('Sie haben ' + typ + ' gewählt! Wir melden uns bald bei Ihnen.');
+            }
+        </script>footer {
             position: fixed;
             bottom: 1.2rem;
             font-family: 'Arial', sans-serif;
