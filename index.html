@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Königs – Versicherungen</title>
+    <!-- SheetJS für Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -76,7 +80,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.85);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -126,7 +130,6 @@
         #agb-scroll::-webkit-scrollbar { width: 6px; }
         #agb-scroll::-webkit-scrollbar-track { background: #0d1b2a; }
         #agb-scroll::-webkit-scrollbar-thumb { background: #c9a84c; border-radius: 3px; }
-
         #agb-scroll h3 { font-size: 0.95rem; color: #c9a84c; margin-top: 1.2rem; margin-bottom: 0.3rem; }
         #agb-scroll h3:first-child { margin-top: 0; }
 
@@ -141,15 +144,13 @@
         }
 
         .agb-check-zeile input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 18px; height: 18px;
             accent-color: #c9a84c;
             cursor: pointer;
             flex-shrink: 0;
         }
 
         .popup-knopfe { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
         #agb-annehmen { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
         #agb-annehmen.aktiv { opacity: 1; cursor: pointer; pointer-events: all; }
 
@@ -236,7 +237,19 @@
         #abschluss { display: none; }
         #abschluss .checkmark { font-size: 4rem; margin-bottom: 1rem; }
         #abschluss h2 { font-size: 1.8rem; color: #c9a84c; margin-bottom: 1rem; }
-        #abschluss p { font-family: Arial; color: #b0a899; font-size: 1.1rem; }
+        #abschluss p { font-family: Arial; color: #b0a899; font-size: 1.1rem; line-height: 1.8; }
+
+        .status-nachricht {
+            margin-top: 1rem;
+            font-family: Arial;
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .status-ok { background: #1a3a1a; color: #6fcf6f; border: 1px solid #6fcf6f; }
+        .status-fehler { background: #3a1a1a; color: #e05c5c; border: 1px solid #e05c5c; }
 
         #about-us-bereich { display: none; max-width: 680px; width: 100%; }
         #about-us-bereich h2 { font-size: 2rem; color: #c9a84c; margin-bottom: 2rem; }
@@ -272,44 +285,32 @@
         <div id="agb-popup">
             <p class="popup-titel">♛ Königs Versicherungen</p>
             <p class="popup-untertitel">Bitte lesen und akzeptieren Sie unsere AGB um fortzufahren.</p>
-
             <div id="agb-scroll">
                 <h3>§ 1 – Geltungsbereich</h3>
-                <p>Diese AGB gelten für alle Leistungen, die Königs Versicherungen über die Website donut-wamps.github.io/koenigs erbringt. Mit der Nutzung der Website akzeptiert der Nutzer diese Bedingungen.</p>
-
+                <p>Diese AGB gelten für alle Leistungen, die Königs Versicherungen über die Website donut-wamps.github.io/koenigs erbringt.</p>
                 <h3>§ 2 – Leistungsbeschreibung</h3>
-                <p>Königs Versicherungen ist ein Vermittlungsdienst. Wir sind kein Versicherungsunternehmen und schließen keine Verträge direkt ab. Die Kontaktaufnahme über das Formular stellt keine verbindliche Anfrage dar.</p>
-
+                <p>Königs Versicherungen ist ein Vermittlungsdienst. Wir sind kein Versicherungsunternehmen und schließen keine Verträge direkt ab.</p>
                 <h3>§ 3 – Haftungsausschluss</h3>
-                <p>Der Anbieter haftet nicht für Schäden durch die Nutzung dieser Website, fehlerhafte Informationen, technische Ausfälle, Datenverlust oder Entscheidungen auf Basis der Website-Inhalte.</p>
-
+                <p>Der Anbieter haftet nicht für Schäden durch die Nutzung dieser Website, fehlerhafte Informationen, technische Ausfälle oder Datenverlust.</p>
                 <h3>§ 4 – Haftung für Nutzerfehler</h3>
-                <p>Der Anbieter haftet nicht für Fehler durch falsche oder unvollständige Angaben des Nutzers im Formular. Es liegt in der Verantwortung des Nutzers, alle Daten vor dem Absenden zu prüfen.</p>
-
+                <p>Der Anbieter haftet nicht für Fehler durch falsche Angaben des Nutzers im Formular.</p>
                 <h3>§ 5 – Reaktionszeit</h3>
-                <p>Die Angabe „unter 1 Stunde" ist eine Zielvorgabe und keine rechtlich verbindliche Zusage. Ein Anspruch auf Einhaltung besteht nicht.</p>
-
+                <p>Die Angabe „unter 1 Stunde" ist eine Zielvorgabe und keine rechtlich verbindliche Zusage.</p>
                 <h3>§ 6 – Keine Rechtsberatung</h3>
-                <p>Die Inhalte dieser Website dienen nur der allgemeinen Information und stellen keine Rechts-, Steuer- oder Finanzberatung dar.</p>
-
+                <p>Die Inhalte dieser Website dienen nur der allgemeinen Information.</p>
                 <h3>§ 7 – Datenschutz</h3>
-                <p>Erhobene Daten (Name, Alter, E-Mail, Versicherungswunsch, Budget) werden ausschließlich zur Bearbeitung der Anfrage genutzt und nicht unbefugt weitergegeben.</p>
-
+                <p>Erhobene Daten werden ausschließlich zur Bearbeitung der Anfrage genutzt und nicht unbefugt weitergegeben.</p>
                 <h3>§ 8 – Klagbarkeit</h3>
-                <p>Eine Klage gegen den Anbieter aufgrund von Erwartungen, die nicht ausdrücklich schriftlich zugesichert wurden, ist ausgeschlossen, soweit gesetzlich zulässig. Es gilt deutsches Recht.</p>
-
+                <p>Eine Klage gegen den Anbieter aufgrund nicht schriftlich zugesicherter Erwartungen ist ausgeschlossen, soweit gesetzlich zulässig.</p>
                 <h3>§ 9 – Änderungen der AGB</h3>
-                <p>Der Anbieter behält sich vor, diese AGB jederzeit zu ändern. Es gilt die zum Zeitpunkt der Nutzung aktuelle Fassung.</p>
-
+                <p>Der Anbieter behält sich vor, diese AGB jederzeit zu ändern.</p>
                 <h3>§ 10 – Salvatorische Klausel</h3>
                 <p>Sollte eine Bestimmung unwirksam sein, berührt dies die übrigen Bestimmungen nicht.</p>
             </div>
-
             <div class="agb-check-zeile">
                 <input type="checkbox" id="agb-checkbox" onchange="pruefeCheckbox()">
                 <label for="agb-checkbox">Ich habe die AGB gelesen und akzeptiere sie.</label>
             </div>
-
             <div class="popup-knopfe">
                 <button class="btn btn-primary" id="agb-annehmen" onclick="agbAnnehmen()">Akzeptieren & fortfahren</button>
                 <button class="btn btn-danger" onclick="agbAblehnen()">Ablehnen</button>
@@ -357,11 +358,11 @@
 
         <div class="frage" id="frage4">
             <h2>Was wollen Sie versichern?</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Auto')">🚗 Auto</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Haus')">🏠 Haus</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Leben')">❤️ Leben</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Gesundheit')">🏥 Gesundheit</button>
+            <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Auto')">🚗 Auto</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Haus')">🏠 Haus</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Leben')">❤️ Leben</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Gesundheit')">🏥 Gesundheit</button>
             </div>
             <br>
             <button class="btn btn-primary" id="weiter4" onclick="weiter(4)" style="display:none;">Weiter →</button>
@@ -381,29 +382,15 @@
             <button class="btn btn-primary" onclick="zeigeBestaetigung()">Weiter →</button>
         </div>
 
+        <!-- Bestätigung -->
         <div id="bestaetigung">
             <h2>Sind Ihre Daten richtig?</h2>
             <div class="daten-tabelle">
-                <div class="daten-zeile">
-                    <span class="label">Name</span>
-                    <span class="wert" id="check-name"></span>
-                </div>
-                <div class="daten-zeile">
-                    <span class="label">Alter</span>
-                    <span class="wert" id="check-alter"></span>
-                </div>
-                <div class="daten-zeile">
-                    <span class="label">E-Mail</span>
-                    <span class="wert" id="check-email"></span>
-                </div>
-                <div class="daten-zeile">
-                    <span class="label">Versicherung</span>
-                    <span class="wert" id="check-versicherung"></span>
-                </div>
-                <div class="daten-zeile">
-                    <span class="label">Monatliches Budget</span>
-                    <span class="wert" id="check-budget"></span>
-                </div>
+                <div class="daten-zeile"><span class="label">Name</span><span class="wert" id="check-name"></span></div>
+                <div class="daten-zeile"><span class="label">Alter</span><span class="wert" id="check-alter"></span></div>
+                <div class="daten-zeile"><span class="label">E-Mail</span><span class="wert" id="check-email"></span></div>
+                <div class="daten-zeile"><span class="label">Versicherung</span><span class="wert" id="check-versicherung"></span></div>
+                <div class="daten-zeile"><span class="label">Monatliches Budget</span><span class="wert" id="check-budget"></span></div>
             </div>
             <div class="bestaetigung-knopfe">
                 <button class="btn btn-primary" onclick="zeigeAbschluss()">✓ Ja, alles richtig</button>
@@ -411,10 +398,14 @@
             </div>
         </div>
 
+        <!-- Abschluss -->
         <div id="abschluss">
             <div class="checkmark">✅</div>
             <h2>Vielen Dank, <span id="abschluss-name"></span>!</h2>
             <p>Wir melden uns in weniger als 1 Stunde bei Ihnen.</p>
+            <br>
+            <p id="status-email" class="status-nachricht"></p>
+            <p id="status-excel" class="status-nachricht"></p>
         </div>
 
         <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
@@ -423,27 +414,18 @@
     <!-- Zu uns -->
     <div id="about-us-bereich">
         <h2>Zu uns</h2>
-
         <div class="about-karte">
             <span class="icon">⏱️</span>
-            <p><strong>Schnell & zuverlässig.</strong><br>
-            Wir sind eine Firma, die sich sehr um ihre Kunden kümmert und versucht alles in unter 1 Stunde für den Kunden bereitzustellen.</p>
+            <p><strong>Schnell & zuverlässig.</strong><br>Wir sind eine Firma, die sich sehr um ihre Kunden kümmert und versucht alles in unter 1 Stunde für den Kunden bereitzustellen.</p>
         </div>
-
         <div class="about-karte">
             <span class="icon">♛</span>
-            <p><strong>Trotz des Namens ist Kunde König.</strong><br>
-            Bei uns steht nicht unser Name im Mittelpunkt — sondern Sie. Jeder Kunde wird bei uns mit höchster Priorität behandelt.</p>
+            <p><strong>Trotz des Namens ist Kunde König.</strong><br>Bei uns steht nicht unser Name im Mittelpunkt — sondern Sie.</p>
         </div>
-
         <div class="about-karte">
             <span class="icon">👥</span>
-            <p><strong>Die Ersteller</strong><br><br>
-            Viktor König<br>
-            Stefan König<br>
-            Christina Frese</p>
+            <p><strong>Die Ersteller</strong><br><br>Viktor König<br>Stefan König<br>Christina Frese</p>
         </div>
-
         <div class="about-zitat">„Trotz des Namens ist Kunde König."</div>
         <br>
         <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
@@ -452,6 +434,15 @@
     <footer>&copy; 2026 Königs. Alle Rechte vorbehalten.</footer>
 
     <script>
+        // ============================================================
+        // HIER IHRE EMAILJS DATEN EINTRAGEN
+        const EMAILJS_PUBLIC_KEY  = 'HIER_IHR_PUBLIC_KEY';
+        const EMAILJS_SERVICE_ID  = 'HIER_IHRE_SERVICE_ID';
+        const EMAILJS_TEMPLATE_ID = 'HIER_IHRE_TEMPLATE_ID';
+        // ============================================================
+
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+
         let gewaehlteVersicherung = '';
 
         window.addEventListener('load', function () {
@@ -464,9 +455,7 @@
 
         function pruefeCheckbox() {
             const checked = document.getElementById('agb-checkbox').checked;
-            const knopf = document.getElementById('agb-annehmen');
-            if (checked) { knopf.classList.add('aktiv'); }
-            else { knopf.classList.remove('aktiv'); }
+            document.getElementById('agb-annehmen').classList.toggle('aktiv', checked);
         }
 
         function agbAnnehmen() {
@@ -482,7 +471,6 @@
             document.getElementById('startseite').style.display = 'none';
             document.getElementById('formular-bereich').style.display = 'none';
             document.getElementById('about-us-bereich').style.display = 'none';
-
             if (seite === 'formular') {
                 document.getElementById('formular-bereich').style.display = 'block';
                 zeigeFrage(1);
@@ -497,7 +485,6 @@
             document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
             document.getElementById('abschluss').style.display = 'none';
             document.getElementById('bestaetigung').style.display = 'none';
-
             if (nr <= 5) {
                 document.getElementById('frage' + nr).classList.add('aktiv');
                 document.getElementById('fortschritt').innerText = 'Schritt ' + nr + ' von 5';
@@ -508,35 +495,89 @@
         function zeigeBestaetigung() {
             document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
             document.getElementById('fortschritt').style.display = 'none';
-
             document.getElementById('check-name').innerText = document.getElementById('vorname-input').value.trim() + ' ' + document.getElementById('nachname-input').value.trim();
             document.getElementById('check-alter').innerText = document.getElementById('alter-input').value + ' Jahre';
             document.getElementById('check-email').innerText = document.getElementById('email-input').value.trim();
             document.getElementById('check-versicherung').innerText = gewaehlteVersicherung;
             document.getElementById('check-budget').innerText = document.getElementById('range-input').value + ' € / Monat';
-
             document.getElementById('bestaetigung').style.display = 'block';
         }
 
         function zeigeAbschluss() {
             document.getElementById('bestaetigung').style.display = 'none';
             document.getElementById('abschluss').style.display = 'block';
-            document.getElementById('abschluss-name').innerText = document.getElementById('nachname-input').value.trim();
+
+            const daten = {
+                name:         document.getElementById('vorname-input').value.trim() + ' ' + document.getElementById('nachname-input').value.trim(),
+                alter:        document.getElementById('alter-input').value + ' Jahre',
+                email:        document.getElementById('email-input').value.trim(),
+                versicherung: gewaehlteVersicherung,
+                budget:       document.getElementById('range-input').value + ' € / Monat'
+            };
+
+            const nachname = document.getElementById('nachname-input').value.trim();
+            document.getElementById('abschluss-name').innerText = nachname;
+
+            excelErstellen(daten);
+            emailSenden(daten);
+        }
+
+        function excelErstellen(daten) {
+            const statusEl = document.getElementById('status-excel');
+            try {
+                const zeile = [['Name', 'Alter', 'E-Mail', 'Budget', 'Versicherungstyp'],
+                               [daten.name, daten.alter, daten.email, daten.budget, daten.versicherung]];
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.aoa_to_sheet(zeile);
+
+                // Spaltenbreite
+                ws['!cols'] = [{wch:25},{wch:12},{wch:30},{wch:20},{wch:20}];
+
+                XLSX.utils.book_append_sheet(wb, ws, 'Anfragen');
+                XLSX.writeFile(wb, 'koenigs-anfrage.xlsx');
+
+                statusEl.innerText = '📥 Excel-Datei wurde heruntergeladen.';
+                statusEl.className = 'status-nachricht status-ok';
+                statusEl.style.display = 'block';
+            } catch (e) {
+                statusEl.innerText = '⚠️ Excel-Download fehlgeschlagen.';
+                statusEl.className = 'status-nachricht status-fehler';
+                statusEl.style.display = 'block';
+            }
+        }
+
+        function emailSenden(daten) {
+            const statusEl = document.getElementById('status-email');
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                name:         daten.name,
+                alter:        daten.alter,
+                email:        daten.email,
+                versicherung: daten.versicherung,
+                budget:       daten.budget
+            }).then(function() {
+                statusEl.innerText = '📧 E-Mail wurde an formullarkoenig@gmail.com gesendet.';
+                statusEl.className = 'status-nachricht status-ok';
+                statusEl.style.display = 'block';
+            }, function() {
+                statusEl.innerText = '⚠️ E-Mail konnte nicht gesendet werden. Bitte EmailJS-Daten prüfen.';
+                statusEl.className = 'status-nachricht status-fehler';
+                statusEl.style.display = 'block';
+            });
         }
 
         function weiter(nr) {
             if (nr === 1) {
-                const vorname = document.getElementById('vorname-input').value.trim();
-                const nachname = document.getElementById('nachname-input').value.trim();
-                if (!vorname || !nachname) { alert('Bitte geben Sie Vor- und Nachname ein.'); return; }
+                const v = document.getElementById('vorname-input').value.trim();
+                const n = document.getElementById('nachname-input').value.trim();
+                if (!v || !n) { alert('Bitte geben Sie Vor- und Nachname ein.'); return; }
             }
             if (nr === 2) {
-                const alter = document.getElementById('alter-input').value;
-                if (!alter || alter < 1 || alter > 120) { alert('Bitte geben Sie ein gültiges Alter ein.'); return; }
+                const a = document.getElementById('alter-input').value;
+                if (!a || a < 1 || a > 120) { alert('Bitte geben Sie ein gültiges Alter ein.'); return; }
             }
             if (nr === 3) {
-                const email = document.getElementById('email-input').value.trim();
-                if (!email || !email.includes('@')) { alert('Bitte geben Sie eine gültige E-Mail ein.'); return; }
+                const e = document.getElementById('email-input').value.trim();
+                if (!e || !e.includes('@')) { alert('Bitte geben Sie eine gültige E-Mail ein.'); return; }
             }
             if (nr === 4) {
                 if (!gewaehlteVersicherung) { alert('Bitte wählen Sie eine Versicherung.'); return; }
