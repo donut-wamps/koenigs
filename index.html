@@ -71,21 +71,93 @@
             color: #5a5650;
         }
 
-        /* Formular */
-        #formular-bereich {
-            display: none;
-            max-width: 680px;
-            width: 100%;
+        /* AGB POPUP */
+        #agb-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
 
+        #agb-popup {
+            background-color: #0d1b2a;
+            border: 2px solid #c9a84c;
+            border-radius: 10px;
+            max-width: 620px;
+            width: 100%;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        #agb-popup .popup-titel {
+            font-family: Georgia, serif;
+            font-size: 1.4rem;
+            color: #c9a84c;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        #agb-popup .popup-untertitel {
+            font-family: Arial, sans-serif;
+            font-size: 0.8rem;
+            color: #5a5650;
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        #agb-scroll {
+            max-height: 320px;
+            overflow-y: auto;
+            border: 1px solid #1e3048;
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            font-family: Arial, sans-serif;
+            font-size: 0.88rem;
+            color: #b0a899;
+            line-height: 1.7;
+        }
+
+        #agb-scroll::-webkit-scrollbar { width: 6px; }
+        #agb-scroll::-webkit-scrollbar-track { background: #0d1b2a; }
+        #agb-scroll::-webkit-scrollbar-thumb { background: #c9a84c; border-radius: 3px; }
+
+        #agb-scroll h3 { font-size: 0.95rem; color: #c9a84c; margin-top: 1.2rem; margin-bottom: 0.3rem; }
+        #agb-scroll h3:first-child { margin-top: 0; }
+
+        .agb-check-zeile {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1.2rem;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            color: #b0a899;
+        }
+
+        .agb-check-zeile input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #c9a84c;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .popup-knopfe { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        #agb-annehmen { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+        #agb-annehmen.aktiv { opacity: 1; cursor: pointer; pointer-events: all; }
+
+        /* Formular */
+        #formular-bereich { display: none; max-width: 680px; width: 100%; }
         .frage { display: none; }
         .frage.aktiv { display: block; }
-
-        .frage h2 {
-            font-size: 1.8rem;
-            color: #c9a84c;
-            margin-bottom: 1.5rem;
-        }
+        .frage h2 { font-size: 1.8rem; color: #c9a84c; margin-bottom: 1.5rem; }
 
         .frage input[type="text"],
         .frage input[type="number"],
@@ -118,31 +190,10 @@
         .versicherung-knopf:hover,
         .versicherung-knopf.ausgewaehlt { background: #c9a84c; border-color: #c9a84c; color: #0d1b2a; }
 
-        .range-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .range-container input[type="range"] {
-            width: 280px;
-            accent-color: #c9a84c;
-        }
-
-        .range-wert {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #c9a84c;
-            font-family: Arial;
-        }
-
-        .fortschritt {
-            font-family: Arial;
-            font-size: 0.85rem;
-            color: #5a5650;
-            margin-bottom: 1.5rem;
-        }
+        .range-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .range-container input[type="range"] { width: 280px; accent-color: #c9a84c; }
+        .range-wert { font-size: 1.4rem; font-weight: bold; color: #c9a84c; font-family: Arial; }
+        .fortschritt { font-family: Arial; font-size: 0.85rem; color: #5a5650; margin-bottom: 1.5rem; }
 
         .zurueck {
             margin-top: 2rem;
@@ -155,14 +206,8 @@
             border: none;
         }
 
-        /* Bestätigung */
         #bestaetigung { display: none; }
-
-        #bestaetigung h2 {
-            font-size: 1.8rem;
-            color: #c9a84c;
-            margin-bottom: 1.5rem;
-        }
+        #bestaetigung h2 { font-size: 1.8rem; color: #c9a84c; margin-bottom: 1.5rem; }
 
         .daten-tabelle {
             background-color: #132130;
@@ -184,36 +229,17 @@
         }
 
         .daten-zeile:last-child { border-bottom: none; }
-
         .daten-zeile .label { color: #5a5650; }
         .daten-zeile .wert { color: #f0ece4; font-weight: 600; }
+        .bestaetigung-knopfe { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
 
-        .bestaetigung-knopfe {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        /* Abschluss */
         #abschluss { display: none; }
         #abschluss .checkmark { font-size: 4rem; margin-bottom: 1rem; }
         #abschluss h2 { font-size: 1.8rem; color: #c9a84c; margin-bottom: 1rem; }
         #abschluss p { font-family: Arial; color: #b0a899; font-size: 1.1rem; }
 
-        /* About Us */
-        #about-us-bereich {
-            display: none;
-            max-width: 680px;
-            width: 100%;
-        }
-
-        #about-us-bereich h2 {
-            font-size: 2rem;
-            color: #c9a84c;
-            margin-bottom: 2rem;
-        }
+        #about-us-bereich { display: none; max-width: 680px; width: 100%; }
+        #about-us-bereich h2 { font-size: 2rem; color: #c9a84c; margin-bottom: 2rem; }
 
         .about-karte {
             background-color: #132130;
@@ -240,6 +266,56 @@
     </style>
 </head>
 <body>
+
+    <!-- AGB POPUP -->
+    <div id="agb-overlay">
+        <div id="agb-popup">
+            <p class="popup-titel">♛ Königs Versicherungen</p>
+            <p class="popup-untertitel">Bitte lesen und akzeptieren Sie unsere AGB um fortzufahren.</p>
+
+            <div id="agb-scroll">
+                <h3>§ 1 – Geltungsbereich</h3>
+                <p>Diese AGB gelten für alle Leistungen, die Königs Versicherungen über die Website donut-wamps.github.io/koenigs erbringt. Mit der Nutzung der Website akzeptiert der Nutzer diese Bedingungen.</p>
+
+                <h3>§ 2 – Leistungsbeschreibung</h3>
+                <p>Königs Versicherungen ist ein Vermittlungsdienst. Wir sind kein Versicherungsunternehmen und schließen keine Verträge direkt ab. Die Kontaktaufnahme über das Formular stellt keine verbindliche Anfrage dar.</p>
+
+                <h3>§ 3 – Haftungsausschluss</h3>
+                <p>Der Anbieter haftet nicht für Schäden durch die Nutzung dieser Website, fehlerhafte Informationen, technische Ausfälle, Datenverlust oder Entscheidungen auf Basis der Website-Inhalte.</p>
+
+                <h3>§ 4 – Haftung für Nutzerfehler</h3>
+                <p>Der Anbieter haftet nicht für Fehler durch falsche oder unvollständige Angaben des Nutzers im Formular. Es liegt in der Verantwortung des Nutzers, alle Daten vor dem Absenden zu prüfen.</p>
+
+                <h3>§ 5 – Reaktionszeit</h3>
+                <p>Die Angabe „unter 1 Stunde" ist eine Zielvorgabe und keine rechtlich verbindliche Zusage. Ein Anspruch auf Einhaltung besteht nicht.</p>
+
+                <h3>§ 6 – Keine Rechtsberatung</h3>
+                <p>Die Inhalte dieser Website dienen nur der allgemeinen Information und stellen keine Rechts-, Steuer- oder Finanzberatung dar.</p>
+
+                <h3>§ 7 – Datenschutz</h3>
+                <p>Erhobene Daten (Name, Alter, E-Mail, Versicherungswunsch, Budget) werden ausschließlich zur Bearbeitung der Anfrage genutzt und nicht unbefugt weitergegeben.</p>
+
+                <h3>§ 8 – Klagbarkeit</h3>
+                <p>Eine Klage gegen den Anbieter aufgrund von Erwartungen, die nicht ausdrücklich schriftlich zugesichert wurden, ist ausgeschlossen, soweit gesetzlich zulässig. Es gilt deutsches Recht.</p>
+
+                <h3>§ 9 – Änderungen der AGB</h3>
+                <p>Der Anbieter behält sich vor, diese AGB jederzeit zu ändern. Es gilt die zum Zeitpunkt der Nutzung aktuelle Fassung.</p>
+
+                <h3>§ 10 – Salvatorische Klausel</h3>
+                <p>Sollte eine Bestimmung unwirksam sein, berührt dies die übrigen Bestimmungen nicht.</p>
+            </div>
+
+            <div class="agb-check-zeile">
+                <input type="checkbox" id="agb-checkbox" onchange="pruefeCheckbox()">
+                <label for="agb-checkbox">Ich habe die AGB gelesen und akzeptiere sie.</label>
+            </div>
+
+            <div class="popup-knopfe">
+                <button class="btn btn-primary" id="agb-annehmen" onclick="agbAnnehmen()">Akzeptieren & fortfahren</button>
+                <button class="btn btn-danger" onclick="agbAblehnen()">Ablehnen</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Startseite -->
     <div id="startseite">
@@ -305,7 +381,6 @@
             <button class="btn btn-primary" onclick="zeigeBestaetigung()">Weiter →</button>
         </div>
 
-        <!-- Bestätigung -->
         <div id="bestaetigung">
             <h2>Sind Ihre Daten richtig?</h2>
             <div class="daten-tabelle">
@@ -336,7 +411,6 @@
             </div>
         </div>
 
-        <!-- Abschluss -->
         <div id="abschluss">
             <div class="checkmark">✅</div>
             <h2>Vielen Dank, <span id="abschluss-name"></span>!</h2>
@@ -370,10 +444,7 @@
             Christina Frese</p>
         </div>
 
-        <div class="about-zitat">
-            „Trotz des Namens ist Kunde König."
-        </div>
-
+        <div class="about-zitat">„Trotz des Namens ist Kunde König."</div>
         <br>
         <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
     </div>
@@ -382,6 +453,30 @@
 
     <script>
         let gewaehlteVersicherung = '';
+
+        window.addEventListener('load', function () {
+            if (localStorage.getItem('agb-akzeptiert') === 'ja') {
+                document.getElementById('agb-overlay').style.display = 'none';
+            }
+            if (window.location.hash === '#formular') zeigeSeite('formular');
+            else if (window.location.hash === '#about-us') zeigeSeite('about-us');
+        });
+
+        function pruefeCheckbox() {
+            const checked = document.getElementById('agb-checkbox').checked;
+            const knopf = document.getElementById('agb-annehmen');
+            if (checked) { knopf.classList.add('aktiv'); }
+            else { knopf.classList.remove('aktiv'); }
+        }
+
+        function agbAnnehmen() {
+            localStorage.setItem('agb-akzeptiert', 'ja');
+            document.getElementById('agb-overlay').style.display = 'none';
+        }
+
+        function agbAblehnen() {
+            document.body.innerHTML = '<div style="font-family:Arial;color:#b0a899;text-align:center;padding:4rem;background:#0d1b2a;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;"><p style="font-size:3rem;margin-bottom:1rem;">♛</p><p style="font-size:1.2rem;color:#e05c5c;margin-bottom:1rem;">Sie haben die AGB abgelehnt.</p><p>Die Nutzung dieser Website ist ohne Zustimmung nicht möglich.</p></div>';
+        }
 
         function zeigeSeite(seite) {
             document.getElementById('startseite').style.display = 'none';
@@ -414,17 +509,11 @@
             document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
             document.getElementById('fortschritt').style.display = 'none';
 
-            const vorname = document.getElementById('vorname-input').value.trim();
-            const nachname = document.getElementById('nachname-input').value.trim();
-            const alter = document.getElementById('alter-input').value;
-            const email = document.getElementById('email-input').value.trim();
-            const budget = document.getElementById('range-input').value;
-
-            document.getElementById('check-name').innerText = vorname + ' ' + nachname;
-            document.getElementById('check-alter').innerText = alter + ' Jahre';
-            document.getElementById('check-email').innerText = email;
+            document.getElementById('check-name').innerText = document.getElementById('vorname-input').value.trim() + ' ' + document.getElementById('nachname-input').value.trim();
+            document.getElementById('check-alter').innerText = document.getElementById('alter-input').value + ' Jahre';
+            document.getElementById('check-email').innerText = document.getElementById('email-input').value.trim();
             document.getElementById('check-versicherung').innerText = gewaehlteVersicherung;
-            document.getElementById('check-budget').innerText = budget + ' € / Monat';
+            document.getElementById('check-budget').innerText = document.getElementById('range-input').value + ' € / Monat';
 
             document.getElementById('bestaetigung').style.display = 'block';
         }
@@ -432,8 +521,7 @@
         function zeigeAbschluss() {
             document.getElementById('bestaetigung').style.display = 'none';
             document.getElementById('abschluss').style.display = 'block';
-            const nachname = document.getElementById('nachname-input').value.trim();
-            document.getElementById('abschluss-name').innerText = nachname;
+            document.getElementById('abschluss-name').innerText = document.getElementById('nachname-input').value.trim();
         }
 
         function weiter(nr) {
@@ -471,14 +559,6 @@
                     if (nr === 5) { zeigeBestaetigung(); return; }
                     if (nr !== 4) weiter(nr);
                 }
-            }
-        });
-
-        window.addEventListener('load', function () {
-            if (window.location.hash === '#formular') {
-                zeigeSeite('formular');
-            } else if (window.location.hash === '#about-us') {
-                zeigeSeite('about-us');
             }
         });
     </script>
