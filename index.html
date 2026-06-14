@@ -73,6 +73,7 @@
             color: #5a5650;
         }
 
+        /* AGB */
         #agb-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -151,6 +152,7 @@
         #agb-annehmen { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
         #agb-annehmen.aktiv { opacity: 1; cursor: pointer; pointer-events: all; }
 
+        /* FORMULAR */
         #formular-bereich { display: none; max-width: 680px; width: 100%; }
         .frage { display: none; }
         .frage.aktiv { display: block; }
@@ -247,6 +249,7 @@
         .status-ok { background: #1a3a1a; color: #6fcf6f; border: 1px solid #6fcf6f; }
         .status-fehler { background: #3a1a1a; color: #e05c5c; border: 1px solid #e05c5c; }
 
+        /* ZU UNS */
         #about-us-bereich { display: none; max-width: 680px; width: 100%; }
         #about-us-bereich h2 { font-size: 2rem; color: #c9a84c; margin-bottom: 2rem; }
 
@@ -272,6 +275,233 @@
             padding-left: 1rem;
             text-align: left;
         }
+
+        /* ADMIN */
+        #admin-bereich { display: none; width: 100%; min-height: 100vh; padding: 0; }
+
+        #admin-login {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .admin-login-box {
+            background: #132130;
+            border: 1px solid #1e3048;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        .admin-login-box h2 {
+            font-family: Georgia, serif;
+            color: #c9a84c;
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .admin-login-box p {
+            color: #b0a899;
+            font-size: 0.85rem;
+            margin-bottom: 1.75rem;
+            font-family: Arial;
+        }
+
+        .admin-login-box input[type="password"] {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: #0d1b2a;
+            border: 1px solid #1e3048;
+            border-radius: 8px;
+            color: #f0ece4;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.75rem;
+            outline: none;
+            font-family: Arial;
+        }
+
+        .admin-login-box input[type="password"]:focus { border-color: #c9a84c; }
+
+        .btn-admin-login {
+            width: 100%;
+            padding: 0.7rem;
+            background: #c9a84c;
+            color: #0d1b2a;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 0.75rem;
+            font-family: Arial;
+        }
+
+        .btn-admin-login:hover { background: #e0c06a; }
+
+        .btn-google {
+            width: 100%;
+            padding: 0.7rem;
+            background: #ffffff;
+            color: #333333;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: Arial;
+        }
+
+        .btn-google:hover { background: #f5f5f5; }
+        .btn-google svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+        .admin-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1rem 0;
+            color: #5a5650;
+            font-size: 0.78rem;
+            font-family: Arial;
+        }
+
+        .admin-divider::before, .admin-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #1e3048;
+        }
+
+        .admin-login-error {
+            color: #e05c5c;
+            font-size: 0.82rem;
+            margin-top: 0.75rem;
+            display: none;
+            font-family: Arial;
+        }
+
+        #admin-panel { display: none; }
+
+        admin-header, .admin-header {
+            background: #132130;
+            border-bottom: 1px solid #1e3048;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+        }
+
+        .admin-brand { display: flex; align-items: center; gap: 0.75rem; }
+        .admin-brand-name { font-family: Georgia, serif; color: #c9a84c; font-size: 1.1rem; }
+        .admin-badge { background: #1e3048; color: #b0a899; font-size: 0.72rem; padding: 3px 10px; border-radius: 99px; font-family: Arial; }
+
+        .admin-header-right { display: flex; align-items: center; gap: 0.75rem; }
+        #admin-user-info { color: #b0a899; font-size: 0.82rem; font-family: Arial; }
+
+        .btn-admin-logout {
+            background: none;
+            border: 1px solid #1e3048;
+            color: #b0a899;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            font-family: Arial;
+        }
+
+        .btn-admin-logout:hover { border-color: #e05c5c; color: #e05c5c; }
+
+        .admin-main { padding: 2rem; max-width: 1100px; margin: 0 auto; text-align: left; }
+
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 700px) { .admin-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .admin-stat-card { background: #132130; border: 1px solid #1e3048; border-radius: 10px; padding: 1rem 1.25rem; }
+        .admin-stat-label { color: #b0a899; font-size: 0.78rem; margin-bottom: 0.4rem; font-family: Arial; }
+        .admin-stat-value { color: #c9a84c; font-size: 1.6rem; font-family: Georgia, serif; }
+
+        .admin-controls { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+        .admin-btn {
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            border: 1px solid #1e3048;
+            background: #132130;
+            color: #f0ece4;
+            font-family: Arial;
+        }
+
+        .admin-btn:hover { border-color: #c9a84c; color: #c9a84c; }
+        .admin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .admin-btn-primary { background: #c9a84c; border-color: #c9a84c; color: #0d1b2a; font-weight: bold; }
+        .admin-btn-primary:hover { background: #e0c06a; border-color: #e0c06a; color: #0d1b2a; }
+        .admin-btn-danger { border-color: #e05c5c; color: #e05c5c; background: #132130; }
+        .admin-btn-danger:hover { background: rgba(224,92,92,0.1); }
+
+        .admin-status {
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 1.25rem;
+            display: none;
+            font-family: Arial;
+            text-align: left;
+        }
+
+        .admin-status-info    { background: rgba(201,168,76,0.15);  border: 1px solid #c9a84c; color: #c9a84c; display: block; }
+        .admin-status-success { background: rgba(111,207,111,0.15); border: 1px solid #6fcf6f; color: #6fcf6f; display: block; }
+        .admin-status-error   { background: rgba(224,92,92,0.15);   border: 1px solid #e05c5c; color: #e05c5c; display: block; }
+
+        .admin-table-wrap {
+            background: #132130;
+            border: 1px solid #1e3048;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 680px; }
+        .admin-table thead tr { background: #1e3048; }
+        .admin-table th { text-align: left; padding: 11px 14px; color: #b0a899; font-size: 0.75rem; font-weight: normal; text-transform: uppercase; letter-spacing: 0.05em; font-family: Arial; }
+        .admin-table td { padding: 11px 14px; border-bottom: 1px solid #1e3048; color: #f0ece4; font-family: Arial; }
+        .admin-table tr:last-child td { border-bottom: none; }
+        .admin-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+        .vbadge { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: bold; }
+        .vb-auto       { background: rgba(55,138,221,0.2);  color: #78c0ff; }
+        .vb-haus       { background: rgba(99,153,34,0.2);   color: #a3d96b; }
+        .vb-leben      { background: rgba(186,117,23,0.2);  color: #f5c96a; }
+        .vb-gesundheit { background: rgba(212,83,126,0.2);  color: #f09ac0; }
+        .vb-unbekannt  { background: rgba(176,168,153,0.15);color: #b0a899; }
+
+        .admin-del-btn { background: none; border: none; color: #5a5650; cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 4px; }
+        .admin-del-btn:hover { color: #e05c5c; background: rgba(224,92,92,0.1); }
+
+        .admin-empty { text-align: center; padding: 3.5rem 1rem; color: #b0a899; font-family: Arial; }
+        .admin-empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+        .admin-spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(201,168,76,0.3); border-top-color: #c9a84c; border-radius: 50%; animation: aspin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+        @keyframes aspin { to { transform: rotate(360deg); } }
+
+        .admin-footer-text { text-align: center; color: #5a5650; font-size: 0.75rem; margin-top: 2.5rem; padding-bottom: 2rem; font-family: Arial; }
     </style>
 </head>
 <body>
@@ -279,7 +509,7 @@
     <!-- AGB POPUP -->
     <div id="agb-overlay">
         <div id="agb-popup">
-            <p class="popup-titel">♛ Königs Versicherungen</p>
+            <p class="popup-titel">&#9819; Königs Versicherungen</p>
             <p class="popup-untertitel">Bitte lesen und akzeptieren Sie unsere AGB um fortzufahren.</p>
             <div id="agb-scroll">
                 <h3>§ 1 – Geltungsbereich</h3>
@@ -308,24 +538,24 @@
                 <label for="agb-checkbox">Ich habe die AGB gelesen und akzeptiere sie.</label>
             </div>
             <div class="popup-knopfe">
-                <button class="btn btn-primary" id="agb-annehmen" onclick="agbAnnehmen()">Akzeptieren & fortfahren</button>
+                <button class="btn btn-primary" id="agb-annehmen" onclick="agbAnnehmen()">Akzeptieren &amp; fortfahren</button>
                 <button class="btn btn-danger" onclick="agbAblehnen()">Ablehnen</button>
             </div>
         </div>
     </div>
 
-    <!-- Startseite -->
+    <!-- STARTSEITE -->
     <div id="startseite">
-        <span class="crown">♛</span>
+        <span class="crown">&#9819;</span>
         <h1>Willkommen bei <span>Königs</span></h1>
         <p class="subtitle">Hier können Sie in kurzer Zeit die richtigen Versicherungen bekommen.</p>
         <div class="buttons">
-            <a href="https://donut-wamps.github.io/koenigs/#formular" class="btn btn-primary" onclick="zeigeSeite('formular')">Formular / Umfrage</a>
-            <a href="https://donut-wamps.github.io/koenigs/#about-us" class="btn btn-secondary" onclick="zeigeSeite('about-us')">Zu uns</a>
+            <a href="#formular" class="btn btn-primary" onclick="zeigeSeite('formular')">Formular / Umfrage</a>
+            <a href="#about-us" class="btn btn-secondary" onclick="zeigeSeite('about-us')">Zu uns</a>
         </div>
     </div>
 
-    <!-- Formular -->
+    <!-- FORMULAR -->
     <div id="formular-bereich">
         <p class="fortschritt" id="fortschritt">Schritt 1 von 5</p>
 
@@ -335,47 +565,47 @@
             <br><br>
             <input type="text" id="nachname-input" placeholder="Nachname">
             <br><br>
-            <button class="btn btn-primary" onclick="weiter(1)">Weiter →</button>
+            <button class="btn btn-primary" onclick="weiter(1)">Weiter &#8594;</button>
         </div>
 
         <div class="frage" id="frage2">
             <h2>Wie alt sind Sie?</h2>
             <input type="number" id="alter-input" min="1" max="120" placeholder="Ihr Alter">
             <br><br>
-            <button class="btn btn-primary" onclick="weiter(2)">Weiter →</button>
+            <button class="btn btn-primary" onclick="weiter(2)">Weiter &#8594;</button>
         </div>
 
         <div class="frage" id="frage3">
             <h2>Was ist Ihre E-Mail Adresse?</h2>
             <input type="email" id="email-input" placeholder="ihre@email.de">
             <br><br>
-            <button class="btn btn-primary" onclick="weiter(3)">Weiter →</button>
+            <button class="btn btn-primary" onclick="weiter(3)">Weiter &#8594;</button>
         </div>
 
         <div class="frage" id="frage4">
             <h2>Was wollen Sie versichern?</h2>
             <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Auto')">🚗 Auto</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Haus')">🏠 Haus</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Leben')">❤️ Leben</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Gesundheit')">🏥 Gesundheit</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Auto')">Auto</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Haus')">Haus</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Leben')">Leben</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this,'Gesundheit')">Gesundheit</button>
             </div>
             <br>
-            <button class="btn btn-primary" id="weiter4" onclick="weiter(4)" style="display:none;">Weiter →</button>
+            <button class="btn btn-primary" id="weiter4" onclick="weiter(4)" style="display:none;">Weiter &#8594;</button>
         </div>
 
         <div class="frage" id="frage5">
             <h2>Was ist Ihre monatliche Budget?</h2>
             <div class="range-container">
-                <div class="range-wert" id="range-anzeige">50 €</div>
+                <div class="range-wert" id="range-anzeige">50 &#8364;</div>
                 <input type="range" id="range-input" min="10" max="500" step="10" value="50"
-                    oninput="document.getElementById('range-anzeige').innerText = this.value + ' €'">
+                    oninput="document.getElementById('range-anzeige').innerText = this.value + ' \u20ac'">
                 <div style="display:flex; justify-content:space-between; width:280px; font-family:Arial; font-size:0.85rem; color:#5a5650;">
-                    <span>10 €</span><span>500 €</span>
+                    <span>10 &#8364;</span><span>500 &#8364;</span>
                 </div>
             </div>
             <br><br>
-            <button class="btn btn-primary" onclick="zeigeBestaetigung()">Weiter →</button>
+            <button class="btn btn-primary" onclick="zeigeBestaetigung()">Weiter &#8594;</button>
         </div>
 
         <div id="bestaetigung">
@@ -388,13 +618,13 @@
                 <div class="daten-zeile"><span class="label">Monatliches Budget</span><span class="wert" id="check-budget"></span></div>
             </div>
             <div class="bestaetigung-knopfe">
-                <button class="btn btn-primary" onclick="zeigeAbschluss()">✓ Ja, alles richtig</button>
-                <button class="btn btn-danger" onclick="zeigeFrage(1)">✗ Nein, korrigieren</button>
+                <button class="btn btn-primary" onclick="zeigeAbschluss()">Ja, alles richtig</button>
+                <button class="btn btn-danger" onclick="zeigeFrage(1)">Nein, korrigieren</button>
             </div>
         </div>
 
         <div id="abschluss">
-            <div class="checkmark">✅</div>
+            <div class="checkmark">&#9989;</div>
             <h2>Vielen Dank, <span id="abschluss-name"></span>!</h2>
             <p>Wir melden uns in weniger als 1 Stunde bei Ihnen.</p>
             <br>
@@ -402,50 +632,158 @@
             <p id="status-excel" class="status-nachricht"></p>
         </div>
 
-        <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
+        <button class="zurueck" onclick="zeigeSeite('start')">&#8592; Zurück zur Startseite</button>
     </div>
 
-    <!-- Zu uns -->
+    <!-- ZU UNS -->
     <div id="about-us-bereich">
         <h2>Zu uns</h2>
         <div class="about-karte">
-            <span class="icon">⏱️</span>
-            <p><strong>Schnell & zuverlässig.</strong><br>Wir sind eine Firma, die sich sehr um ihre Kunden kümmert und versucht alles in unter 1 Stunde für den Kunden bereitzustellen.</p>
+            <span class="icon">&#9201;</span>
+            <p><strong>Schnell &amp; zuverlässig.</strong><br>Wir sind eine Firma, die sich sehr um ihre Kunden kümmert und versucht alles in unter 1 Stunde für den Kunden bereitzustellen.</p>
         </div>
         <div class="about-karte">
-            <span class="icon">♛</span>
+            <span class="icon">&#9819;</span>
             <p><strong>Trotz des Namens ist Kunde König.</strong><br>Bei uns steht nicht unser Name im Mittelpunkt — sondern Sie.</p>
         </div>
         <div class="about-karte">
-            <span class="icon">👥</span>
+            <span class="icon">&#128101;</span>
             <p><strong>Die Ersteller</strong><br><br>Viktor König<br>Stefan König<br>Christina Frese</p>
         </div>
         <div class="about-zitat">„Trotz des Namens ist Kunde König."</div>
         <br>
-        <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
+        <button class="zurueck" onclick="zeigeSeite('start')">&#8592; Zurück zur Startseite</button>
+    </div>
+
+    <!-- ADMIN -->
+    <div id="admin-bereich">
+
+        <div id="admin-login">
+            <div class="admin-login-box">
+                <h2>&#9819; VKF Admin</h2>
+                <p>Interner Bereich – nur für Mitarbeiter</p>
+                <input type="password" id="admin-pw" placeholder="Passwort" onkeydown="if(event.key==='Enter') adminLoginPW()" />
+                <button class="btn-admin-login" onclick="adminLoginPW()">Einloggen</button>
+                <div class="admin-divider">oder</div>
+                <button class="btn-google" onclick="adminGoogleLogin()">
+                    <svg viewBox="0 0 48 48">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    Mit Google anmelden
+                </button>
+                <div class="admin-login-error" id="admin-login-error">Falsches Passwort.</div>
+            </div>
+        </div>
+
+        <div id="admin-panel">
+            <div class="admin-header">
+                <div class="admin-brand">
+                    <span class="admin-brand-name">&#9819; VKF Admin</span>
+                    <span class="admin-badge">Interner Bereich</span>
+                </div>
+                <div class="admin-header-right">
+                    <span id="admin-user-info"></span>
+                    <button class="btn-admin-logout" onclick="adminLogout()">Abmelden</button>
+                </div>
+            </div>
+
+            <div class="admin-main">
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card"><div class="admin-stat-label">Anfragen gesamt</div><div class="admin-stat-value" id="astat-total">0</div></div>
+                    <div class="admin-stat-card"><div class="admin-stat-label">&#216; Budget</div><div class="admin-stat-value" id="astat-avg">&#8211;</div></div>
+                    <div class="admin-stat-card"><div class="admin-stat-label">Häufigste Versicherung</div><div class="admin-stat-value" id="astat-top" style="font-size:1rem;padding-top:8px">&#8211;</div></div>
+                    <div class="admin-stat-card"><div class="admin-stat-label">Letzter Abruf</div><div class="admin-stat-value" id="astat-time" style="font-size:0.85rem;padding-top:8px;color:#b0a899">&#8211;</div></div>
+                </div>
+
+                <div class="admin-controls">
+                    <button class="admin-btn admin-btn-primary" id="admin-btn-scan" onclick="adminScanEmails()">&#8635; E-Mails abrufen</button>
+                    <button class="admin-btn" id="admin-btn-export" onclick="adminExportCSV()" disabled>&#8595; CSV herunterladen</button>
+                    <button class="admin-btn admin-btn-danger" id="admin-btn-clear" onclick="adminClearAll()" disabled>&#10005; Leeren</button>
+                </div>
+
+                <div class="admin-status" id="admin-status"></div>
+
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Alter</th>
+                                <th>E-Mail</th>
+                                <th>Versicherung</th>
+                                <th>Budget</th>
+                                <th>Datum</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-tbody">
+                            <tr><td colspan="7"><div class="admin-empty"><div class="admin-empty-icon">&#128139;</div>Noch keine Daten</div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="admin-footer-text">Königs Versicherungen &#183; Interner Bereich &#183; Nur für autorisierte Mitarbeiter</div>
+            </div>
+        </div>
     </div>
 
     <footer>&copy; 2026 Königs. Alle Rechte vorbehalten.</footer>
 
     <script>
+        /* ── EMAILJS ── */
         const EMAILJS_PUBLIC_KEY  = 'ooyTrUWVSavdCXkSy';
         const EMAILJS_SERVICE_ID  = 'service_3b0vlao';
         const EMAILJS_TEMPLATE_ID = 'template_k0x3iug';
-
         emailjs.init(EMAILJS_PUBLIC_KEY);
 
+        /* ── ADMIN KONFIGURATION ── */
+        const ADMIN_PASSWORD = 'ADMIN';
+        const GOOGLE_CLIENT_ID = '373467087391-d1sld3ls39ph0nts8r8im10hv6hqumai.apps.googleusercontent.com';
+        const GMAIL_SCOPE = 'https://www.googleapis.com/auth/gmail.readonly';
+
+        let adminRows = [];
+        let adminScanning = false;
+        let adminAccessToken = null;
         let gewaehlteVersicherung = '';
 
+        /* ── SEITEN-ROUTING ── */
         window.addEventListener('load', function () {
             if (localStorage.getItem('agb-akzeptiert') === 'ja') {
                 document.getElementById('agb-overlay').style.display = 'none';
             }
-            if (window.location.hash === '#formular') zeigeSeite('formular');
-            else if (window.location.hash === '#about-us') zeigeSeite('about-us');
+            var hash = window.location.hash;
+            if (hash === '#formular') zeigeSeite('formular');
+            else if (hash === '#about-us') zeigeSeite('about-us');
+            else if (hash === '#VKF') zeigeSeite('admin');
         });
 
+        function zeigeSeite(seite) {
+            document.getElementById('startseite').style.display        = 'none';
+            document.getElementById('formular-bereich').style.display  = 'none';
+            document.getElementById('about-us-bereich').style.display  = 'none';
+            document.getElementById('admin-bereich').style.display     = 'none';
+            document.querySelector('footer').style.display             = 'block';
+
+            if (seite === 'formular') {
+                document.getElementById('formular-bereich').style.display = 'block';
+                zeigeFrage(1);
+            } else if (seite === 'about-us') {
+                document.getElementById('about-us-bereich').style.display = 'block';
+            } else if (seite === 'admin') {
+                document.getElementById('admin-bereich').style.display = 'block';
+                document.querySelector('footer').style.display = 'none';
+                document.getElementById('agb-overlay').style.display = 'none';
+            } else {
+                document.getElementById('startseite').style.display = 'block';
+            }
+        }
+
+        /* ── AGB ── */
         function pruefeCheckbox() {
-            const checked = document.getElementById('agb-checkbox').checked;
+            var checked = document.getElementById('agb-checkbox').checked;
             document.getElementById('agb-annehmen').classList.toggle('aktiv', checked);
         }
 
@@ -455,107 +793,87 @@
         }
 
         function agbAblehnen() {
-            document.body.innerHTML = '<div style="font-family:Arial;color:#b0a899;text-align:center;padding:4rem;background:#0d1b2a;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;"><p style="font-size:3rem;margin-bottom:1rem;">♛</p><p style="font-size:1.2rem;color:#e05c5c;margin-bottom:1rem;">Sie haben die AGB abgelehnt.</p><p>Die Nutzung dieser Website ist ohne Zustimmung nicht möglich.</p></div>';
+            document.body.innerHTML = '<div style="font-family:Arial;color:#b0a899;text-align:center;padding:4rem;background:#0d1b2a;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;"><p style="font-size:3rem;margin-bottom:1rem;">&#9819;</p><p style="font-size:1.2rem;color:#e05c5c;margin-bottom:1rem;">Sie haben die AGB abgelehnt.</p><p>Die Nutzung dieser Website ist ohne Zustimmung nicht möglich.</p></div>';
         }
 
-        function zeigeSeite(seite) {
-            document.getElementById('startseite').style.display = 'none';
-            document.getElementById('formular-bereich').style.display = 'none';
-            document.getElementById('about-us-bereich').style.display = 'none';
-            if (seite === 'formular') {
-                document.getElementById('formular-bereich').style.display = 'block';
-                zeigeFrage(1);
-            } else if (seite === 'about-us') {
-                document.getElementById('about-us-bereich').style.display = 'block';
-            } else {
-                document.getElementById('startseite').style.display = 'block';
-            }
-        }
-
+        /* ── FORMULAR ── */
         function zeigeFrage(nr) {
-            document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
-            document.getElementById('abschluss').style.display = 'none';
+            document.querySelectorAll('.frage').forEach(function(f) { f.classList.remove('aktiv'); });
+            document.getElementById('abschluss').style.display    = 'none';
             document.getElementById('bestaetigung').style.display = 'none';
             if (nr <= 5) {
                 document.getElementById('frage' + nr).classList.add('aktiv');
-                document.getElementById('fortschritt').innerText = 'Schritt ' + nr + ' von 5';
-                document.getElementById('fortschritt').style.display = 'block';
+                document.getElementById('fortschritt').innerText      = 'Schritt ' + nr + ' von 5';
+                document.getElementById('fortschritt').style.display  = 'block';
             }
         }
 
         function zeigeBestaetigung() {
-            document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
+            document.querySelectorAll('.frage').forEach(function(f) { f.classList.remove('aktiv'); });
             document.getElementById('fortschritt').style.display = 'none';
-            document.getElementById('check-name').innerText = document.getElementById('vorname-input').value.trim() + ' ' + document.getElementById('nachname-input').value.trim();
-            document.getElementById('check-alter').innerText = document.getElementById('alter-input').value + ' Jahre';
-            document.getElementById('check-email').innerText = document.getElementById('email-input').value.trim();
+            document.getElementById('check-name').innerText        = document.getElementById('vorname-input').value.trim() + ' ' + document.getElementById('nachname-input').value.trim();
+            document.getElementById('check-alter').innerText       = document.getElementById('alter-input').value + ' Jahre';
+            document.getElementById('check-email').innerText       = document.getElementById('email-input').value.trim();
             document.getElementById('check-versicherung').innerText = gewaehlteVersicherung;
-            document.getElementById('check-budget').innerText = document.getElementById('range-input').value + ' € / Monat';
-            document.getElementById('bestaetigung').style.display = 'block';
+            document.getElementById('check-budget').innerText      = document.getElementById('range-input').value + ' \u20ac / Monat';
+            document.getElementById('bestaetigung').style.display  = 'block';
         }
 
         function zeigeAbschluss() {
             document.getElementById('bestaetigung').style.display = 'none';
-            document.getElementById('abschluss').style.display = 'block';
+            document.getElementById('abschluss').style.display    = 'block';
 
-            const daten = {
+            var daten = {
                 name:         document.getElementById('vorname-input').value.trim() + ' ' + document.getElementById('nachname-input').value.trim(),
                 alter:        document.getElementById('alter-input').value + ' Jahre',
                 email:        document.getElementById('email-input').value.trim(),
                 versicherung: gewaehlteVersicherung,
-                budget:       document.getElementById('range-input').value + ' € / Monat'
+                budget:       document.getElementById('range-input').value + ' \u20ac / Monat'
             };
 
             document.getElementById('abschluss-name').innerText = document.getElementById('nachname-input').value.trim();
-
             excelErstellen(daten);
             emailSenden(daten);
         }
 
         function excelErstellen(daten) {
-            const statusEl = document.getElementById('status-excel');
+            var statusEl = document.getElementById('status-excel');
             try {
-                const zeilen = [
+                var zeilen = [
                     ['Name', 'Alter', 'E-Mail', 'Budget', 'Versicherungstyp'],
                     [daten.name, daten.alter, daten.email, daten.budget, daten.versicherung]
                 ];
-                const wb = XLSX.utils.book_new();
-                const ws = XLSX.utils.aoa_to_sheet(zeilen);
+                var wb = XLSX.utils.book_new();
+                var ws = XLSX.utils.aoa_to_sheet(zeilen);
                 ws['!cols'] = [{wch:25},{wch:12},{wch:30},{wch:20},{wch:20}];
                 XLSX.utils.book_append_sheet(wb, ws, 'Anfragen');
                 XLSX.writeFile(wb, 'koenigs-anfrage.xlsx');
-                statusEl.innerText = '📥 Excel-Datei wurde heruntergeladen.';
+                statusEl.innerText = 'Excel-Datei wurde heruntergeladen.';
                 statusEl.className = 'status-nachricht status-ok';
                 statusEl.style.display = 'block';
-            } catch (e) {
-                statusEl.innerText = '⚠️ Excel-Download fehlgeschlagen.';
+            } catch(e) {
+                statusEl.innerText = 'Excel-Download fehlgeschlagen.';
                 statusEl.className = 'status-nachricht status-fehler';
                 statusEl.style.display = 'block';
             }
         }
 
         function emailSenden(daten) {
-            const statusEl = document.getElementById('status-email');
-
-            const jetzt = new Date();
-            const datum = jetzt.toLocaleDateString('de-DE') + ' um ' + jetzt.toLocaleTimeString('de-DE');
-            const csvZeile = daten.name + ',' + daten.alter + ',' + daten.email + ',' + daten.budget + ',' + daten.versicherung;
+            var statusEl = document.getElementById('status-email');
+            var jetzt    = new Date();
+            var datum    = jetzt.toLocaleDateString('de-DE') + ' um ' + jetzt.toLocaleTimeString('de-DE');
+            var csvZeile = daten.name + ',' + daten.alter + ',' + daten.email + ',' + daten.budget + ',' + daten.versicherung;
 
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                name:         daten.name,
-                alter:        daten.alter,
-                email:        daten.email,
-                versicherung: daten.versicherung,
-                budget:       daten.budget,
-                datum:        datum,
-                csv_zeile:    csvZeile
+                name: daten.name, alter: daten.alter, email: daten.email,
+                versicherung: daten.versicherung, budget: daten.budget,
+                datum: datum, csv_zeile: csvZeile
             }).then(function() {
-                statusEl.innerText = '📧 E-Mail wurde an formullarkoenig@gmail.com gesendet.';
+                statusEl.innerText = 'E-Mail wurde gesendet.';
                 statusEl.className = 'status-nachricht status-ok';
                 statusEl.style.display = 'block';
-            }, function(fehler) {
-                console.error('EmailJS Fehler:', fehler);
-                statusEl.innerText = '⚠️ E-Mail konnte nicht gesendet werden.';
+            }, function() {
+                statusEl.innerText = 'E-Mail konnte nicht gesendet werden.';
                 statusEl.className = 'status-nachricht status-fehler';
                 statusEl.style.display = 'block';
             });
@@ -563,16 +881,16 @@
 
         function weiter(nr) {
             if (nr === 1) {
-                const v = document.getElementById('vorname-input').value.trim();
-                const n = document.getElementById('nachname-input').value.trim();
+                var v = document.getElementById('vorname-input').value.trim();
+                var n = document.getElementById('nachname-input').value.trim();
                 if (!v || !n) { alert('Bitte geben Sie Vor- und Nachname ein.'); return; }
             }
             if (nr === 2) {
-                const a = document.getElementById('alter-input').value;
+                var a = document.getElementById('alter-input').value;
                 if (!a || a < 1 || a > 120) { alert('Bitte geben Sie ein gültiges Alter ein.'); return; }
             }
             if (nr === 3) {
-                const e = document.getElementById('email-input').value.trim();
+                var e = document.getElementById('email-input').value.trim();
                 if (!e || !e.includes('@')) { alert('Bitte geben Sie eine gültige E-Mail ein.'); return; }
             }
             if (nr === 4) {
@@ -582,7 +900,7 @@
         }
 
         function waehleVersicherung(knopf, typ) {
-            document.querySelectorAll('.versicherung-knopf').forEach(k => k.classList.remove('ausgewaehlt'));
+            document.querySelectorAll('.versicherung-knopf').forEach(function(k) { k.classList.remove('ausgewaehlt'); });
             knopf.classList.add('ausgewaehlt');
             gewaehlteVersicherung = typ;
             document.getElementById('weiter4').style.display = 'inline-block';
@@ -590,14 +908,381 @@
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                const aktiv = document.querySelector('.frage.aktiv');
+                var aktiv = document.querySelector('.frage.aktiv');
                 if (aktiv) {
-                    const nr = parseInt(aktiv.id.replace('frage', ''));
+                    var nr = parseInt(aktiv.id.replace('frage', ''));
                     if (nr === 5) { zeigeBestaetigung(); return; }
                     if (nr !== 4) weiter(nr);
                 }
             }
         });
+
+        /* ── ADMIN LOGIN ── */
+        function adminLoginPW() {
+            var val = document.getElementById('admin-pw').value;
+            if (val === ADMIN_PASSWORD) {
+                document.getElementById('admin-login-error').style.display = 'none';
+                document.getElementById('admin-user-info').textContent = 'Passwort-Login';
+                adminOeffnePanel();
+            } else {
+                document.getElementById('admin-login-error').style.display = 'block';
+                document.getElementById('admin-pw').value = '';
+                document.getElementById('admin-pw').focus();
+            }
+        }
+
+        function adminGoogleLogin() {
+            var url = 'https://accounts.google.com/o/oauth2/v2/auth' +
+                '?client_id=' + GOOGLE_CLIENT_ID +
+                '&redirect_uri=' + encodeURIComponent('https://donut-wamps.github.io/koenigs/') +
+                '&response_type=token' +
+                '&scope=' + encodeURIComponent(GMAIL_SCOPE) +
+                '&prompt=select_account';
+
+            var popup = window.open(url, 'google-login', 'width=500,height=600,left=200,top=100');
+
+            var timer = setInterval(function() {
+                try {
+                    if (popup.closed) { clearInterval(timer); return; }
+                    var href = popup.location.href;
+                    if (href.indexOf('access_token') !== -1) {
+                        clearInterval(timer);
+                        popup.close();
+                        var hash = href.split('#')[1] || '';
+                        var params = {};
+                        hash.split('&').forEach(function(p) {
+                            var kv = p.split('=');
+                            params[kv[0]] = decodeURIComponent(kv[1] || '');
+                        });
+                        adminAccessToken = params['access_token'];
+                        document.getElementById('admin-user-info').textContent = 'Google-Login aktiv';
+                        adminOeffnePanel();
+                    }
+                } catch(e) {}
+            }, 300);
+        }
+
+        function adminOeffnePanel() {
+            document.getElementById('admin-login').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+        }
+
+        function adminLogout() {
+            adminAccessToken = null;
+            adminRows = [];
+            adminRenderTable();
+            document.getElementById('admin-panel').style.display  = 'none';
+            document.getElementById('admin-login').style.display  = 'flex';
+            document.getElementById('admin-pw').value = '';
+            document.getElementById('admin-status').style.display = 'none';
+        }
+
+        /* ── ADMIN E-MAILS ── */
+        async function adminScanEmails() {
+            if (adminScanning) return;
+
+            if (!adminAccessToken) {
+                adminShowStatus('Bitte zuerst mit Google anmelden um E-Mails zu lesen.', 'error');
+                return;
+            }
+
+            adminScanning = true;
+            var btn = document.getElementById('admin-btn-scan');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="admin-spinner"></span>Wird abgerufen...';
+            adminShowStatus('Verbinde mit Gmail...', 'info');
+
+            try {
+                var listRes = await fetch(
+                    'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=50',
+                    { headers: { 'Authorization': 'Bearer ' + adminAccessToken } }
+                );
+                var listData = await listRes.json();
+
+                if (listData.error) throw new Error(listData.error.message);
+
+                if (!listData.messages || listData.messages.length === 0) {
+                    adminShowStatus('Keine E-Mails gefunden.', 'info');
+                    return;
+                }
+
+                var newEntries = [];
+                var existing = new Set(adminRows.map(function(r) { return r.msgId; }));
+
+                for (var i = 0; i < Math.min(listData.messages.length, 30); i++) {
+                    var msgId = listData.messages[i].id;
+                    if (existing.has(msgId)) continue;
+
+                    var msgRes = await fetch(
+                        'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + msgId + '?format=full',
+                        { headers: { 'Authorization': 'Bearer ' + adminAccessToken } }
+                    );
+                    var msgData = await msgRes.json();
+                    var entry = adminParseEmail(msgData, msgId);
+                    if (entry) newEntries.push(entry);
+                }
+
+                adminRows = adminRows.concat(newEntries);
+
+                if (newEntries.length === 0) {
+                    adminShowStatus('Alle E-Mails bereits in der Tabelle.', 'info');
+                } else {
+                    adminShowStatus('OK: ' + newEntries.length + ' neue E-Mail(s) eingetragen.', 'success');
+                }
+
+                adminRenderTable();
+
+            } catch(err) {
+                adminShowStatus('Fehler: ' + err.message, 'error');
+            } finally {
+                adminScanning = false;
+                btn.disabled = false;
+                btn.innerHTML = '&#8635; E-Mails abrufen';
+            }
+        }
+
+        /* ── E-MAIL PARSEN (VERBESSERT) ── */
+        function adminDecodeBase64(str) {
+            try {
+                return decodeURIComponent(escape(atob(str.replace(/-/g,'+').replace(/_/g,'/'))));
+            } catch(e) {
+                try { return atob(str.replace(/-/g,'+').replace(/_/g,'/')); } catch(e2) { return ''; }
+            }
+        }
+
+        function adminDecodeEntities(str) {
+            /* HTML-Entities in echte Zeichen umwandeln */
+            return str
+                .replace(/&#(\d+);/g, function(m, n) { return String.fromCharCode(parseInt(n)); })
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/<[^>]+>/g, ' ')  /* HTML-Tags entfernen */
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function adminGetBody(payload) {
+            if (!payload) return '';
+            if (payload.mimeType === 'text/plain' && payload.body && payload.body.data) {
+                return adminDecodeBase64(payload.body.data);
+            }
+            if (payload.mimeType === 'text/html' && payload.body && payload.body.data) {
+                return adminDecodeEntities(adminDecodeBase64(payload.body.data));
+            }
+            if (payload.body && payload.body.data) {
+                return adminDecodeBase64(payload.body.data);
+            }
+            if (payload.parts) {
+                /* Erst text/plain suchen */
+                for (var i = 0; i < payload.parts.length; i++) {
+                    if (payload.parts[i].mimeType === 'text/plain') {
+                        var t = adminGetBody(payload.parts[i]);
+                        if (t) return t;
+                    }
+                }
+                /* Dann alles andere */
+                for (var j = 0; j < payload.parts.length; j++) {
+                    var t2 = adminGetBody(payload.parts[j]);
+                    if (t2) return t2;
+                }
+            }
+            return '';
+        }
+
+        function adminGrab(text, patterns) {
+            for (var i = 0; i < patterns.length; i++) {
+                var m = text.match(patterns[i]);
+                if (m && m[1]) return m[1].trim().replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+            }
+            return '';
+        }
+
+        function adminParseEmail(msgData, msgId) {
+            var headers = msgData.payload.headers || [];
+            var subject = '';
+            var date    = '';
+            var from    = '';
+
+            for (var i = 0; i < headers.length; i++) {
+                if (headers[i].name === 'Subject') subject = headers[i].value;
+                if (headers[i].name === 'Date')    date    = headers[i].value;
+                if (headers[i].name === 'From')    from    = headers[i].value;
+            }
+
+            var body = adminGetBody(msgData.payload);
+            var full = adminDecodeEntities(subject) + '\n' + body;
+
+            /* Name: Vorname + Nachname kombinieren (EmailJS Template schickt beide separat) */
+            var vorname  = adminGrab(full, [/Vorname[:\s\|]+([^\n\r\|,<]{1,30})/i]);
+            var nachname = adminGrab(full, [/Nachname[:\s\|]+([^\n\r\|,<]{1,30})/i]);
+            var name     = '';
+
+            if (vorname && nachname) {
+                name = vorname.trim() + ' ' + nachname.trim();
+            } else {
+                name = adminGrab(full, [
+                    /Name[:\s\|]+([^\n\r\|,<]{2,40})/i,
+                    /Kunde[:\s\|]+([^\n\r\|,<]{2,40})/i
+                ]);
+            }
+
+            /* Alter */
+            var alter = adminGrab(full, [
+                /Alter[:\s\|]+(\d{1,3})/i,
+                /(\d{1,3})\s*Jahre/i
+            ]);
+
+            /* E-Mail */
+            var email = adminGrab(full, [
+                /E-Mail[:\s\|]+([\w.+%-]+@[\w.-]+\.\w+)/i,
+                /Email[:\s\|]+([\w.+%-]+@[\w.-]+\.\w+)/i,
+                /([\w.+%-]+@[\w.-]+\.\w+)/
+            ]);
+
+            /* Versicherung */
+            var versicherung = adminGrab(full, [
+                /Versicherung(?:styp)?[:\s\|]+(Auto|Haus|Leben|Gesundheit)/i,
+                /\b(Auto|Haus|Leben|Gesundheit)versicherung\b/i,
+                /versichern[:\s\|]+(Auto|Haus|Leben|Gesundheit)/i,
+                /\b(Auto|Haus|Leben|Gesundheit)\b/i
+            ]);
+
+            /* Budget — nur Zahl extrahieren */
+            var budgetRaw = adminGrab(full, [
+                /Budget[:\s\|]+([\d]+)/i,
+                /(\d+)\s*\u20ac/,
+                /(\d+)\s*Euro/i,
+                /(\d+)\s*EUR/i
+            ]);
+            var budget = budgetRaw ? budgetRaw + ' \u20ac' : '';
+
+            /* Datum */
+            var datum = '';
+            try {
+                var d = new Date(date);
+                datum = d.toLocaleDateString('de-DE') + ' ' +
+                        d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+            } catch(e) { datum = date.slice(0,16); }
+
+            /* Absender-Name als Fallback */
+            if (!name) {
+                name = from.split('<')[0].trim().replace(/"/g,'') || '?';
+            }
+
+            return {
+                msgId:        msgId,
+                name:         name,
+                alter:        alter,
+                email:        email,
+                versicherung: versicherung,
+                budget:       budget,
+                datum:        datum,
+                betreff:      adminDecodeEntities(subject)
+            };
+        }
+
+        /* ── TABELLE RENDERN ── */
+        function adminVBadge(v) {
+            var map = { 'auto':'vb-auto','haus':'vb-haus','leben':'vb-leben','gesundheit':'vb-gesundheit' };
+            var key = (v||'').toLowerCase().trim();
+            var cls = map[key] || 'vb-unbekannt';
+            return '<span class="vbadge ' + cls + '">' + (v||'?') + '</span>';
+        }
+
+        function adminRenderTable() {
+            var tbody     = document.getElementById('admin-tbody');
+            var exportBtn = document.getElementById('admin-btn-export');
+            var clearBtn  = document.getElementById('admin-btn-clear');
+
+            if (adminRows.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7"><div class="admin-empty"><div class="admin-empty-icon">&#128139;</div>Noch keine Daten</div></td></tr>';
+                exportBtn.disabled = true;
+                clearBtn.disabled  = true;
+                adminUpdateStats();
+                return;
+            }
+
+            exportBtn.disabled = false;
+            clearBtn.disabled  = false;
+
+            var html = '';
+            for (var i = 0; i < adminRows.length; i++) {
+                var r = adminRows[i];
+                html += '<tr>' +
+                    '<td>' + (r.name || '&#8211;') + '</td>' +
+                    '<td>' + (r.alter || '&#8211;') + '</td>' +
+                    '<td style="font-size:0.8rem;color:#b0a899">' + (r.email || r.betreff || '&#8211;') + '</td>' +
+                    '<td>' + adminVBadge(r.versicherung) + '</td>' +
+                    '<td>' + (r.budget || '&#8211;') + '</td>' +
+                    '<td style="font-size:0.78rem;color:#b0a899">' + (r.datum || '&#8211;') + '</td>' +
+                    '<td><button class="admin-del-btn" onclick="adminDeleteRow(' + i + ')">&#10005;</button></td>' +
+                    '</tr>';
+            }
+            tbody.innerHTML = html;
+            adminUpdateStats();
+        }
+
+        function adminUpdateStats() {
+            document.getElementById('astat-total').textContent = adminRows.length;
+
+            var budgets = adminRows.map(function(r) {
+                return parseFloat((r.budget||'').replace(/[^\d.]/g,''));
+            }).filter(function(n) { return !isNaN(n) && n > 0; });
+
+            document.getElementById('astat-avg').textContent = budgets.length
+                ? Math.round(budgets.reduce(function(a,b){return a+b;},0) / budgets.length) + ' \u20ac'
+                : '&#8211;';
+
+            var counts = {};
+            adminRows.forEach(function(r) {
+                var v = r.versicherung || '?';
+                counts[v] = (counts[v]||0) + 1;
+            });
+            var top = Object.entries(counts).sort(function(a,b){return b[1]-a[1];})[0];
+            document.getElementById('astat-top').textContent = top ? top[0] : '&#8211;';
+
+            var now = new Date();
+            document.getElementById('astat-time').textContent =
+                now.toLocaleDateString('de-DE') + ' ' +
+                now.toLocaleTimeString('de-DE', {hour:'2-digit',minute:'2-digit'});
+        }
+
+        function adminDeleteRow(i) {
+            if (!confirm('Eintrag löschen?')) return;
+            adminRows.splice(i, 1);
+            adminRenderTable();
+        }
+
+        function adminClearAll() {
+            if (!confirm('Alle Einträge löschen?')) return;
+            adminRows = [];
+            adminRenderTable();
+            document.getElementById('admin-status').style.display = 'none';
+        }
+
+        function adminShowStatus(msg, type) {
+            var bar = document.getElementById('admin-status');
+            bar.textContent = msg;
+            bar.className = 'admin-status admin-status-' + type;
+        }
+
+        function adminExportCSV() {
+            var lines = ['Name,Alter,E-Mail,Versicherung,Budget,Datum,Betreff'];
+            adminRows.forEach(function(r) {
+                lines.push([r.name,r.alter,r.email,r.versicherung,r.budget,r.datum,r.betreff]
+                    .map(function(v){ return '"'+(v||'').replace(/"/g,'""')+'"'; }).join(','));
+            });
+            var blob = new Blob(['\uFEFF'+lines.join('\n')], {type:'text/csv;charset=utf-8;'});
+            var url  = URL.createObjectURL(blob);
+            var a    = document.createElement('a');
+            a.href   = url;
+            a.download = 'koenigs-anfragen.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
     </script>
 
 </body>
