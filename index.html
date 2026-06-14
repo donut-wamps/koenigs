@@ -1,47 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koenigs</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Königs – Versicherungen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #0d1b2a;
+            color: #f0ece4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero {
+            max-width: 680px;
+            width: 100%;
+        }
+
+        .crown {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: #f0ece4;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+
+        h1 span {
+            color: #c9a84c;
+        }
+
+        .subtitle {
+            font-family: 'Arial', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: #b0a899;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-primary {
+            background-color: #c9a84c;
+            color: #0d1b2a;
+            border: 2px solid #c9a84c;
+        }
+
+        .btn-primary:hover {
+            background-color: #e0c06a;
+            border-color: #e0c06a;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #f0ece4;
+            border: 2px solid #f0ece4;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0ece4;
+            color: #0d1b2a;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 1.2rem;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.8rem;
+            color: #5a5650;
+        }
+
+        /* Hidden sections for anchor links */
+        section {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section id="home">
-            <h1>Welcome to Koenigs</h1>
-            <p>Your content here</p>
-        </section>
+    <div class="hero">
+        <span class="crown">♛</span>
+        <h1>Willkommen bei <span>Königs</span></h1>
+        <p class="subtitle">Hier können Sie in kurzer Zeit die richtigen Versicherungen bekommen.</p>
 
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Your content here</p>
-        </section>
+        <div class="buttons">
+            <a href="#formular" class="btn btn-primary">Formular / Umfrage</a>
+            <a href="#about-us" class="btn btn-secondary">About Us</a>
+        </div>
+    </div>
 
-        <section id="services">
-            <h2>Services</h2>
-            <p>Your content here</p>
-        </section>
+    <!-- Sections (werden durch Anker-Links angesteuert) -->
+    <section id="formular">
+        <h2>Formular / Umfrage</h2>
+    </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Your content here</p>
-        </section>
-    </main>
+    <section id="about-us">
+        <h2>About Us</h2>
+    </section>
 
     <footer>
-        <p>&copy; 2026 Koenigs. All rights reserved.</p>
+        &copy; 2026 Königs. Alle Rechte vorbehalten.
     </footer>
+
 </body>
 </html>
