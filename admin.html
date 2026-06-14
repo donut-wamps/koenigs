@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VKF Admin – Königs Versicherungen</title>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <title>VKF Admin</title>
 </head>
 <body>
 
@@ -18,7 +17,6 @@ body {
   min-height: 100vh;
 }
 
-/* LOGIN */
 #login-screen {
   min-height: 100vh;
   display: flex;
@@ -70,7 +68,7 @@ body {
   border-color: #c9a84c;
 }
 
-.btn-login {
+.btn-gold {
   width: 100%;
   padding: 0.7rem;
   background: #c9a84c;
@@ -80,15 +78,40 @@ body {
   font-size: 0.95rem;
   font-weight: bold;
   cursor: pointer;
+  margin-bottom: 0.75rem;
 }
 
-.btn-login:hover { background: #e0c06a; }
+.btn-gold:hover { background: #e0c06a; }
+
+.btn-google {
+  width: 100%;
+  padding: 0.7rem;
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-google:hover { background: #f5f5f5; }
+
+.btn-google svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
 
 .divider {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin: 1.25rem 0;
+  margin: 1rem 0;
   color: #5a5650;
   font-size: 0.78rem;
 }
@@ -100,8 +123,6 @@ body {
   background: #1e3048;
 }
 
-#google-btn-wrap { display: flex; justify-content: center; }
-
 .login-error {
   color: #e05c5c;
   font-size: 0.82rem;
@@ -109,7 +130,6 @@ body {
   display: none;
 }
 
-/* ADMIN */
 #admin-screen { display: none; }
 
 header {
@@ -121,32 +141,11 @@ header {
   justify-content: space-between;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
+.brand { display: flex; align-items: center; gap: 0.75rem; }
+.brand-name { font-family: Georgia, serif; color: #c9a84c; font-size: 1.1rem; }
+.badge { background: #1e3048; color: #b0a899; font-size: 0.72rem; padding: 3px 10px; border-radius: 99px; }
 
-.brand-name {
-  font-family: Georgia, serif;
-  color: #c9a84c;
-  font-size: 1.1rem;
-}
-
-.badge {
-  background: #1e3048;
-  color: #b0a899;
-  font-size: 0.72rem;
-  padding: 3px 10px;
-  border-radius: 99px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
+.header-right { display: flex; align-items: center; gap: 0.75rem; }
 #user-info { color: #b0a899; font-size: 0.82rem; }
 
 .btn-logout {
@@ -163,7 +162,6 @@ header {
 
 .main { padding: 2rem; max-width: 1100px; margin: 0 auto; }
 
-/* STATS */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -171,150 +169,79 @@ header {
   margin-bottom: 2rem;
 }
 
-@media (max-width: 700px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-}
+@media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 
-.stat-card {
-  background: #132130;
-  border: 1px solid #1e3048;
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-}
-
+.stat-card { background: #132130; border: 1px solid #1e3048; border-radius: 10px; padding: 1rem 1.25rem; }
 .stat-label { color: #b0a899; font-size: 0.78rem; margin-bottom: 0.4rem; }
 .stat-value { color: #c9a84c; font-size: 1.6rem; font-family: Georgia, serif; }
 
-/* CONTROLS */
-.controls {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
+.controls { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
 
-.btn {
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-size: 0.88rem;
-  cursor: pointer;
-  border: 1px solid #1e3048;
-  background: #132130;
-  color: #f0ece4;
-}
-
+.btn { padding: 8px 18px; border-radius: 8px; font-size: 0.88rem; cursor: pointer; border: 1px solid #1e3048; background: #132130; color: #f0ece4; }
 .btn:hover { border-color: #c9a84c; color: #c9a84c; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.btn-primary {
-  background: #c9a84c;
-  border-color: #c9a84c;
-  color: #0d1b2a;
-  font-weight: bold;
-}
-
+.btn-primary { background: #c9a84c; border-color: #c9a84c; color: #0d1b2a; font-weight: bold; }
 .btn-primary:hover { background: #e0c06a; border-color: #e0c06a; color: #0d1b2a; }
 
 .btn-danger { border-color: #e05c5c; color: #e05c5c; background: #132130; }
 .btn-danger:hover { background: rgba(224,92,92,0.1); }
 
-/* STATUS */
-.status-bar {
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  margin-bottom: 1.25rem;
-  display: none;
-}
+.status-bar { padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.25rem; display: none; }
+.status-info    { background: rgba(201,168,76,0.15);  border: 1px solid #c9a84c; color: #c9a84c; display: block; }
+.status-success { background: rgba(111,207,111,0.15); border: 1px solid #6fcf6f; color: #6fcf6f; display: block; }
+.status-error   { background: rgba(224,92,92,0.15);   border: 1px solid #e05c5c; color: #e05c5c; display: block; }
 
-.status-info    { background: rgba(201,168,76,0.15); border: 1px solid #c9a84c; color: #c9a84c; }
-.status-success { background: rgba(111,207,111,0.15); border: 1px solid #6fcf6f; color: #6fcf6f; }
-.status-error   { background: rgba(224,92,92,0.15); border: 1px solid #e05c5c; color: #e05c5c; }
-
-/* TABLE */
-.table-wrap {
-  background: #132130;
-  border: 1px solid #1e3048;
-  border-radius: 10px;
-  overflow-x: auto;
-}
+.table-wrap { background: #132130; border: 1px solid #1e3048; border-radius: 10px; overflow-x: auto; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 680px; }
-
 thead tr { background: #1e3048; }
-
-th {
-  text-align: left;
-  padding: 11px 14px;
-  color: #b0a899;
-  font-size: 0.75rem;
-  font-weight: normal;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
+th { text-align: left; padding: 11px 14px; color: #b0a899; font-size: 0.75rem; font-weight: normal; text-transform: uppercase; letter-spacing: 0.05em; }
 td { padding: 11px 14px; border-bottom: 1px solid #1e3048; color: #f0ece4; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(255,255,255,0.03); }
 
 .badge-typ { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: bold; }
-.b-auto       { background: rgba(55,138,221,0.2); color: #78c0ff; }
-.b-haus       { background: rgba(99,153,34,0.2);  color: #a3d96b; }
-.b-leben      { background: rgba(186,117,23,0.2); color: #f5c96a; }
-.b-gesundheit { background: rgba(212,83,126,0.2); color: #f09ac0; }
-.b-unbekannt  { background: rgba(176,168,153,0.15); color: #b0a899; }
+.b-auto       { background: rgba(55,138,221,0.2);  color: #78c0ff; }
+.b-haus       { background: rgba(99,153,34,0.2);   color: #a3d96b; }
+.b-leben      { background: rgba(186,117,23,0.2);  color: #f5c96a; }
+.b-gesundheit { background: rgba(212,83,126,0.2);  color: #f09ac0; }
+.b-unbekannt  { background: rgba(176,168,153,0.15);color: #b0a899; }
 
-.del-btn {
-  background: none;
-  border: none;
-  color: #5a5650;
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
+.del-btn { background: none; border: none; color: #5a5650; cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 4px; }
 .del-btn:hover { color: #e05c5c; background: rgba(224,92,92,0.1); }
 
 .empty-state { text-align: center; padding: 3.5rem 1rem; color: #b0a899; }
 .empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
 
-.spinner {
-  display: inline-block;
-  width: 13px; height: 13px;
-  border: 2px solid rgba(201,168,76,0.3);
-  border-top-color: #c9a84c;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  vertical-align: middle;
-  margin-right: 6px;
-}
-
+.spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(201,168,76,0.3); border-top-color: #c9a84c; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.footer {
-  text-align: center;
-  color: #5a5650;
-  font-size: 0.75rem;
-  margin-top: 2.5rem;
-  padding-bottom: 2rem;
-}
+.footer { text-align: center; color: #5a5650; font-size: 0.75rem; margin-top: 2.5rem; padding-bottom: 2rem; }
 </style>
 
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="crown">♛</div>
-    <h1>Königs Versicherungen</h1>
-    <p>Interner Bereich – nur für Mitarbeiter</p>
+    <div class="crown">&#9819;</div>
+    <h1>K&#246;nigs Versicherungen</h1>
+    <p>Interner Bereich &#8211; nur f&#252;r Mitarbeiter</p>
 
-    <input type="password" id="pw-input" placeholder="Passwort"
-           onkeydown="if(event.key==='Enter') loginPW()" />
-    <button class="btn-login" onclick="loginPW()">Einloggen</button>
+    <input type="password" id="pw-input" placeholder="Passwort" onkeydown="if(event.key==='Enter') loginPW()" />
+    <button class="btn-gold" onclick="loginPW()">Einloggen</button>
 
-    <div class="divider">oder mit Google anmelden</div>
+    <div class="divider">oder</div>
 
-    <div id="google-btn-wrap"></div>
+    <button class="btn-google" onclick="startGoogleLogin()">
+      <svg viewBox="0 0 48 48">
+        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        <path fill="none" d="M0 0h48v48H0z"/>
+      </svg>
+      Mit Google anmelden
+    </button>
 
     <div class="login-error" id="login-error">Falsches Passwort.</div>
   </div>
@@ -324,7 +251,7 @@ tr:hover td { background: rgba(255,255,255,0.03); }
 <div id="admin-screen">
   <header>
     <div class="brand">
-      <span class="brand-name">♛ VKF Admin</span>
+      <span class="brand-name">&#9819; VKF Admin</span>
       <span class="badge">Interner Bereich</span>
     </div>
     <div class="header-right">
@@ -334,30 +261,17 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   </header>
 
   <div class="main">
-
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-label">Anfragen gesamt</div>
-        <div class="stat-value" id="stat-total">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Ø Budget</div>
-        <div class="stat-value" id="stat-avg">–</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Häufigste Versicherung</div>
-        <div class="stat-value" id="stat-top" style="font-size:1rem;padding-top:8px">–</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Letzter Abruf</div>
-        <div class="stat-value" id="stat-time" style="font-size:0.85rem;padding-top:8px;color:#b0a899">–</div>
-      </div>
+      <div class="stat-card"><div class="stat-label">Anfragen gesamt</div><div class="stat-value" id="stat-total">0</div></div>
+      <div class="stat-card"><div class="stat-label">&#216; Budget</div><div class="stat-value" id="stat-avg">&#8211;</div></div>
+      <div class="stat-card"><div class="stat-label">H&#228;ufigste Versicherung</div><div class="stat-value" id="stat-top" style="font-size:1rem;padding-top:8px">&#8211;</div></div>
+      <div class="stat-card"><div class="stat-label">Letzter Abruf</div><div class="stat-value" id="stat-time" style="font-size:0.85rem;padding-top:8px;color:#b0a899">&#8211;</div></div>
     </div>
 
     <div class="controls">
-      <button class="btn btn-primary" id="btn-scan" onclick="scanEmails()">⟳ E-Mails abrufen</button>
-      <button class="btn" id="btn-export" onclick="exportCSV()" disabled>↓ CSV herunterladen</button>
-      <button class="btn btn-danger" id="btn-clear" onclick="clearAll()" disabled>✕ Leeren</button>
+      <button class="btn btn-primary" id="btn-scan" onclick="scanEmails()">&#8635; E-Mails abrufen</button>
+      <button class="btn" id="btn-export" onclick="exportCSV()" disabled>&#8595; CSV herunterladen</button>
+      <button class="btn btn-danger" id="btn-clear" onclick="clearAll()" disabled>&#10005; Leeren</button>
     </div>
 
     <div class="status-bar" id="status-bar"></div>
@@ -376,76 +290,57 @@ tr:hover td { background: rgba(255,255,255,0.03); }
           </tr>
         </thead>
         <tbody id="table-body">
-          <tr>
-            <td colspan="7">
-              <div class="empty-state">
-                <div class="empty-icon">📭</div>
-                Noch keine Daten – klick auf „E-Mails abrufen"
-              </div>
-            </td>
-          </tr>
+          <tr><td colspan="7"><div class="empty-state"><div class="empty-icon">&#128139;</div>Noch keine Daten &#8211; klick auf E-Mails abrufen</div></td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="footer">Königs Versicherungen · Interner Bereich · Nur für autorisierte Mitarbeiter</div>
-
+    <div class="footer">K&#246;nigs Versicherungen &#183; Interner Bereich &#183; Nur f&#252;r autorisierte Mitarbeiter</div>
   </div>
 </div>
 
 <script>
-var PASSWORD    = 'ADMIN';
-var CLIENT_ID   = '373467087391-d1sld3ls39ph0nts8r8im10hv6hqumai.apps.googleusercontent.com';
-var GMAIL_SCOPE = 'https://www.googleapis.com/auth/gmail.readonly';
+var PASSWORD  = 'ADMIN';
+var CLIENT_ID = '373467087391-d1sld3ls39ph0nts8r8im10hv6hqumai.apps.googleusercontent.com';
+var SCOPE     = 'https://www.googleapis.com/auth/gmail.readonly';
 
 var rows        = [];
 var scanning    = false;
 var accessToken = null;
-var tokenClient = null;
 
-/* Immer Login zeigen – egal ob #VKF oder nicht */
-document.getElementById('login-screen').style.display = 'flex';
+/* Google OAuth2 Popup */
+function startGoogleLogin() {
+  var url = 'https://accounts.google.com/o/oauth2/v2/auth' +
+    '?client_id=' + CLIENT_ID +
+    '&redirect_uri=' + encodeURIComponent('https://donut-wamps.github.io/koenigs/admin.html') +
+    '&response_type=token' +
+    '&scope=' + encodeURIComponent(SCOPE) +
+    '&prompt=select_account';
 
-/* Google Identity Services initialisieren sobald geladen */
-function initGoogle() {
-  if (typeof google === 'undefined') {
-    setTimeout(initGoogle, 200);
-    return;
-  }
+  var popup = window.open(url, 'google-login', 'width=500,height=600,left=200,top=100');
 
-  google.accounts.id.initialize({
-    client_id: CLIENT_ID,
-    callback: onGoogleLogin
-  });
-
-  google.accounts.id.renderButton(
-    document.getElementById('google-btn-wrap'),
-    { theme: 'filled_black', size: 'large', text: 'signin_with', shape: 'rectangular', width: 280 }
-  );
-
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CLIENT_ID,
-    scope: GMAIL_SCOPE,
-    callback: onTokenReceived
-  });
-}
-
-window.addEventListener('load', initGoogle);
-
-function onGoogleLogin(response) {
-  var parts   = response.credential.split('.');
-  var payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
-  document.getElementById('user-info').textContent = payload.email;
-  tokenClient.requestAccessToken({ prompt: 'consent' });
-}
-
-function onTokenReceived(tokenResponse) {
-  if (tokenResponse.error) {
-    showStatus('Google-Anmeldung fehlgeschlagen: ' + tokenResponse.error, 'error');
-    return;
-  }
-  accessToken = tokenResponse.access_token;
-  openAdmin();
+  var timer = setInterval(function() {
+    try {
+      if (popup.closed) {
+        clearInterval(timer);
+        return;
+      }
+      var href = popup.location.href;
+      if (href.indexOf('access_token') !== -1) {
+        clearInterval(timer);
+        popup.close();
+        var hash = href.split('#')[1] || '';
+        var params = {};
+        hash.split('&').forEach(function(p) {
+          var kv = p.split('=');
+          params[kv[0]] = decodeURIComponent(kv[1] || '');
+        });
+        accessToken = params['access_token'];
+        document.getElementById('user-info').textContent = 'Google-Login aktiv';
+        openAdmin();
+      }
+    } catch(e) {}
+  }, 300);
 }
 
 function loginPW() {
@@ -476,75 +371,75 @@ function logout() {
   document.getElementById('pw-input').value = '';
 }
 
-/* ── E-MAILS ABRUFEN ── */
+/* E-MAILS ABRUFEN */
 async function scanEmails() {
   if (scanning) return;
 
   if (!accessToken) {
-    showStatus('Bitte zuerst mit Google anmelden um E-Mails zu lesen.', 'error');
+    showStatus('Bitte zuerst mit Google anmelden.', 'error');
     return;
   }
 
   scanning = true;
   var btn = document.getElementById('btn-scan');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Wird abgerufen…';
-  showStatus('Verbinde mit Gmail…', 'info');
+  btn.innerHTML = '<span class="spinner"></span>Wird abgerufen...';
+  showStatus('Verbinde mit Gmail...', 'info');
 
   try {
     var listRes = await fetch(
-      'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=30&q=subject%3AAnfrage+OR+subject%3AVersionsicherung+OR+subject%3AK%C3%B6nigs',
+      'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=50',
       { headers: { 'Authorization': 'Bearer ' + accessToken } }
     );
     var listData = await listRes.json();
 
+    if (listData.error) throw new Error(listData.error.message);
+
     if (!listData.messages || listData.messages.length === 0) {
-      showStatus('Keine passenden E-Mails gefunden.', 'info');
+      showStatus('Keine E-Mails gefunden.', 'info');
       return;
     }
 
     var newEntries = [];
-    var existing   = new Set(rows.map(function(r) { return r.email + '|' + r.datum; }));
+    var existing = new Set(rows.map(function(r) { return r.msgId; }));
 
-    for (var i = 0; i < Math.min(listData.messages.length, 20); i++) {
-      var msgRes  = await fetch(
-        'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + listData.messages[i].id + '?format=full',
+    for (var i = 0; i < Math.min(listData.messages.length, 30); i++) {
+      var msgId = listData.messages[i].id;
+      if (existing.has(msgId)) continue;
+
+      var msgRes = await fetch(
+        'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + msgId + '?format=full',
         { headers: { 'Authorization': 'Bearer ' + accessToken } }
       );
       var msgData = await msgRes.json();
-      var entry   = parseEmail(msgData);
-      if (!entry) continue;
-      var key = entry.email + '|' + entry.datum;
-      if (!existing.has(key)) {
-        existing.add(key);
-        newEntries.push(entry);
-      }
+      var entry = parseEmail(msgData, msgId);
+      if (entry) newEntries.push(entry);
     }
 
     rows = rows.concat(newEntries);
 
     if (newEntries.length === 0) {
-      showStatus('Alle Anfragen bereits in der Tabelle.', 'info');
+      showStatus('Alle E-Mails bereits in der Tabelle.', 'info');
     } else {
-      showStatus('✓ ' + newEntries.length + ' neue Anfrage(n) eingetragen.', 'success');
+      showStatus('OK: ' + newEntries.length + ' neue E-Mail(s) eingetragen.', 'success');
     }
 
     renderTable();
 
-  } catch (err) {
+  } catch(err) {
     showStatus('Fehler: ' + err.message, 'error');
   } finally {
     scanning = false;
     btn.disabled = false;
-    btn.innerHTML = '⟳ E-Mails abrufen';
+    btn.innerHTML = '&#8635; E-Mails abrufen';
   }
 }
 
-/* ── E-MAIL PARSEN ── */
+/* E-MAIL PARSEN */
 function getBody(payload) {
   if (!payload) return '';
   if (payload.body && payload.body.data) {
-    return atob(payload.body.data.replace(/-/g, '+').replace(/_/g, '/'));
+    try { return atob(payload.body.data.replace(/-/g,'+').replace(/_/g,'/')); } catch(e) { return ''; }
   }
   if (payload.parts) {
     for (var i = 0; i < payload.parts.length; i++) {
@@ -558,30 +453,37 @@ function getBody(payload) {
 function grab(text, patterns) {
   for (var i = 0; i < patterns.length; i++) {
     var m = text.match(patterns[i]);
-    if (m && m[1]) return m[1].trim();
+    if (m && m[1]) return m[1].trim().replace(/<[^>]+>/g,'');
   }
   return '';
 }
 
-function parseEmail(msgData) {
+function parseEmail(msgData, msgId) {
   var headers = msgData.payload.headers || [];
   var subject = '';
   var date    = '';
+  var fromHdr = '';
 
   for (var i = 0; i < headers.length; i++) {
     if (headers[i].name === 'Subject') subject = headers[i].value;
     if (headers[i].name === 'Date')    date    = headers[i].value;
+    if (headers[i].name === 'From')    fromHdr = headers[i].value;
   }
-
-  if (!/anfrage|versicherung|k.nigs/i.test(subject)) return null;
 
   var body = getBody(msgData.payload);
   var full = subject + '\n' + body;
 
+  /* Name aus E-Mail-Header falls nicht im Body */
   var name = grab(full, [
-    /Name[:\s]+([^\n\r,<]+)/i,
-    /Kunde[:\s]+([^\n\r,<]+)/i
+    /Name[:\s]+([^\n\r,<]{2,40})/i,
+    /Kunde[:\s]+([^\n\r,<]{2,40})/i,
+    /Vorname[:\s]+([^\n\r,<]{2,20})/i
   ]);
+
+  /* Vorname + Nachname kombinieren falls vorhanden */
+  var vorname  = grab(full, [/Vorname[:\s]+([^\n\r,<]{2,20})/i]);
+  var nachname = grab(full, [/Nachname[:\s]+([^\n\r,<]{2,20})/i]);
+  if (vorname && nachname) name = vorname + ' ' + nachname;
 
   var alter = grab(full, [
     /Alter[:\s]+(\d+)/i,
@@ -589,9 +491,9 @@ function parseEmail(msgData) {
   ]);
 
   var email = grab(full, [
-    /E-Mail[:\s]+([\w.+-]+@[\w.-]+\.\w+)/i,
-    /Email[:\s]+([\w.+-]+@[\w.-]+\.\w+)/i,
-    /([\w.+-]+@[\w.-]+\.\w+)/
+    /E-Mail[:\s]+([\w.+%-]+@[\w.-]+\.\w+)/i,
+    /Email[:\s]+([\w.+%-]+@[\w.-]+\.\w+)/i,
+    /([\w.+%-]+@[\w.-]+\.\w+)/
   ]);
 
   var versicherung = grab(full, [
@@ -602,8 +504,9 @@ function parseEmail(msgData) {
 
   var budget = grab(full, [
     /Budget[:\s]+(\d+)/i,
-    /(\d+)\s*€/i,
-    /(\d+)\s*Euro/i
+    /(\d+)\s*&#8364;/i,
+    /(\d+)\s*Euro/i,
+    /(\d+)\s*EUR/i
   ]);
 
   var datum = '';
@@ -611,19 +514,26 @@ function parseEmail(msgData) {
     var d = new Date(date);
     datum = d.toLocaleDateString('de-DE') + ' ' +
             d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
-  } catch(e) { datum = date.slice(0, 16); }
+  } catch(e) { datum = date.slice(0,16); }
 
-  if (!name && !email) return null;
-
-  return { name: name, alter: alter, email: email, versicherung: versicherung, budget: budget, datum: datum };
+  return {
+    msgId:        msgId,
+    name:         name || fromHdr.split('<')[0].trim() || '?',
+    alter:        alter,
+    email:        email,
+    versicherung: versicherung,
+    budget:       budget,
+    datum:        datum,
+    betreff:      subject
+  };
 }
 
-/* ── TABELLE ── */
+/* TABELLE */
 function badge(v) {
-  var map = { 'auto': 'b-auto', 'haus': 'b-haus', 'leben': 'b-leben', 'gesundheit': 'b-gesundheit' };
-  var key = (v || '').toLowerCase().trim();
+  var map = { 'auto':'b-auto','haus':'b-haus','leben':'b-leben','gesundheit':'b-gesundheit' };
+  var key = (v||'').toLowerCase().trim();
   var cls = map[key] || 'b-unbekannt';
-  return '<span class="badge-typ ' + cls + '">' + (v || '?') + '</span>';
+  return '<span class="badge-typ ' + cls + '">' + (v||'?') + '</span>';
 }
 
 function renderTable() {
@@ -632,7 +542,7 @@ function renderTable() {
   var clearBtn  = document.getElementById('btn-clear');
 
   if (rows.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📭</div>Noch keine Daten</div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">&#128139;</div>Noch keine Daten</div></td></tr>';
     exportBtn.disabled = true;
     clearBtn.disabled  = true;
     updateStats();
@@ -646,13 +556,13 @@ function renderTable() {
   for (var i = 0; i < rows.length; i++) {
     var r = rows[i];
     html += '<tr>' +
-      '<td>' + (r.name || '–') + '</td>' +
-      '<td>' + (r.alter || '–') + '</td>' +
-      '<td style="font-size:0.8rem;color:#b0a899">' + (r.email || '–') + '</td>' +
+      '<td>' + (r.name||'&#8211;') + '</td>' +
+      '<td>' + (r.alter||'&#8211;') + '</td>' +
+      '<td style="font-size:0.8rem;color:#b0a899">' + (r.email||r.betreff||'&#8211;') + '</td>' +
       '<td>' + badge(r.versicherung) + '</td>' +
-      '<td>' + (r.budget ? r.budget + ' €' : '–') + '</td>' +
-      '<td style="font-size:0.78rem;color:#b0a899">' + (r.datum || '–') + '</td>' +
-      '<td><button class="del-btn" onclick="deleteRow(' + i + ')">✕</button></td>' +
+      '<td>' + (r.budget ? r.budget+' &#8364;' : '&#8211;') + '</td>' +
+      '<td style="font-size:0.78rem;color:#b0a899">' + (r.datum||'&#8211;') + '</td>' +
+      '<td><button class="del-btn" onclick="deleteRow(' + i + ')">&#10005;</button></td>' +
       '</tr>';
   }
   tbody.innerHTML = html;
@@ -661,57 +571,44 @@ function renderTable() {
 
 function updateStats() {
   document.getElementById('stat-total').textContent = rows.length;
-
-  var budgets = rows.map(function(r) { return parseFloat(r.budget); }).filter(function(n) { return !isNaN(n); });
+  var budgets = rows.map(function(r){return parseFloat(r.budget);}).filter(function(n){return !isNaN(n);});
   document.getElementById('stat-avg').textContent = budgets.length
-    ? Math.round(budgets.reduce(function(a,b){return a+b;},0) / budgets.length) + '€' : '–';
-
+    ? Math.round(budgets.reduce(function(a,b){return a+b;},0)/budgets.length)+'&#8364;' : '&#8211;';
   var counts = {};
-  rows.forEach(function(r) {
-    var v = r.versicherung || '?';
-    counts[v] = (counts[v] || 0) + 1;
-  });
+  rows.forEach(function(r){ var v=r.versicherung||'?'; counts[v]=(counts[v]||0)+1; });
   var top = Object.entries(counts).sort(function(a,b){return b[1]-a[1];})[0];
-  document.getElementById('stat-top').textContent = top ? top[0] : '–';
-
+  document.getElementById('stat-top').textContent = top ? top[0] : '&#8211;';
   var now = new Date();
   document.getElementById('stat-time').textContent =
-    now.toLocaleDateString('de-DE') + ' ' +
-    now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+    now.toLocaleDateString('de-DE')+' '+now.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
 }
 
 function deleteRow(i) {
-  if (!confirm('Eintrag löschen?')) return;
-  rows.splice(i, 1);
+  if (!confirm('Eintrag l&#246;schen?')) return;
+  rows.splice(i,1);
   renderTable();
 }
 
 function clearAll() {
-  if (!confirm('Alle Einträge löschen?')) return;
+  if (!confirm('Alle Eintr&#228;ge l&#246;schen?')) return;
   rows = [];
   renderTable();
   document.getElementById('status-bar').style.display = 'none';
 }
 
-/* ── STATUS ── */
 function showStatus(msg, type) {
   var bar = document.getElementById('status-bar');
   bar.textContent = msg;
   bar.className = 'status-bar status-' + type;
-  bar.style.display = 'block';
 }
 
-/* ── CSV ── */
 function exportCSV() {
-  var lines = ['Name,Alter,E-Mail,Versicherung,Budget (€),Datum'];
+  var lines = ['Name,Alter,E-Mail,Versicherung,Budget,Datum,Betreff'];
   rows.forEach(function(r) {
-    lines.push(
-      [r.name, r.alter, r.email, r.versicherung, r.budget, r.datum]
-        .map(function(v) { return '"' + (v||'').replace(/"/g,'""') + '"'; })
-        .join(',')
-    );
+    lines.push([r.name,r.alter,r.email,r.versicherung,r.budget,r.datum,r.betreff]
+      .map(function(v){ return '"'+(v||'').replace(/"/g,'""')+'"'; }).join(','));
   });
-  var blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+  var blob = new Blob(['\uFEFF'+lines.join('\n')], {type:'text/csv;charset=utf-8;'});
   var url  = URL.createObjectURL(blob);
   var a    = document.createElement('a');
   a.href   = url;
