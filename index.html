@@ -53,12 +53,15 @@
             transition: all 0.2s ease;
             cursor: pointer;
             letter-spacing: 0.03em;
+            border: none;
         }
 
         .btn-primary { background-color: #c9a84c; color: #0d1b2a; border: 2px solid #c9a84c; }
         .btn-primary:hover { background-color: #e0c06a; border-color: #e0c06a; }
         .btn-secondary { background-color: transparent; color: #f0ece4; border: 2px solid #f0ece4; }
         .btn-secondary:hover { background-color: #f0ece4; color: #0d1b2a; }
+        .btn-danger { background-color: transparent; color: #e05c5c; border: 2px solid #e05c5c; }
+        .btn-danger:hover { background-color: #e05c5c; color: #f0ece4; }
 
         footer {
             position: fixed;
@@ -152,6 +155,47 @@
             border: none;
         }
 
+        /* Bestätigung */
+        #bestaetigung { display: none; }
+
+        #bestaetigung h2 {
+            font-size: 1.8rem;
+            color: #c9a84c;
+            margin-bottom: 1.5rem;
+        }
+
+        .daten-tabelle {
+            background-color: #132130;
+            border: 1px solid #c9a84c;
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            width: 100%;
+        }
+
+        .daten-zeile {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #1e3048;
+            font-family: Arial;
+            font-size: 1rem;
+        }
+
+        .daten-zeile:last-child { border-bottom: none; }
+
+        .daten-zeile .label { color: #5a5650; }
+        .daten-zeile .wert { color: #f0ece4; font-weight: 600; }
+
+        .bestaetigung-knopfe {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
         /* Abschluss */
         #abschluss { display: none; }
         #abschluss .checkmark { font-size: 4rem; margin-bottom: 1rem; }
@@ -180,22 +224,9 @@
             text-align: left;
         }
 
-        .about-karte .icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-            display: block;
-        }
-
-        .about-karte p {
-            font-family: Arial;
-            font-size: 1rem;
-            color: #b0a899;
-            line-height: 1.7;
-        }
-
-        .about-karte strong {
-            color: #f0ece4;
-        }
+        .about-karte .icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+        .about-karte p { font-family: Arial; font-size: 1rem; color: #b0a899; line-height: 1.7; }
+        .about-karte strong { color: #f0ece4; }
 
         .about-zitat {
             margin-top: 2rem;
@@ -217,7 +248,7 @@
         <p class="subtitle">Hier können Sie in kurzer Zeit die richtigen Versicherungen bekommen.</p>
         <div class="buttons">
             <a href="https://donut-wamps.github.io/koenigs/#formular" class="btn btn-primary" onclick="zeigeSeite('formular')">Formular / Umfrage</a>
-            <a href="https://donut-wamps.github.io/koenigs/#about-us" class="btn btn-secondary" onclick="zeigeSeite('about-us')">About Us</a>
+            <a href="https://donut-wamps.github.io/koenigs/#about-us" class="btn btn-secondary" onclick="zeigeSeite('about-us')">Zu uns</a>
         </div>
     </div>
 
@@ -271,9 +302,41 @@
                 </div>
             </div>
             <br><br>
-            <button class="btn btn-primary" onclick="weiter(5)">Weiter →</button>
+            <button class="btn btn-primary" onclick="zeigeBestaetigung()">Weiter →</button>
         </div>
 
+        <!-- Bestätigung -->
+        <div id="bestaetigung">
+            <h2>Sind Ihre Daten richtig?</h2>
+            <div class="daten-tabelle">
+                <div class="daten-zeile">
+                    <span class="label">Name</span>
+                    <span class="wert" id="check-name"></span>
+                </div>
+                <div class="daten-zeile">
+                    <span class="label">Alter</span>
+                    <span class="wert" id="check-alter"></span>
+                </div>
+                <div class="daten-zeile">
+                    <span class="label">E-Mail</span>
+                    <span class="wert" id="check-email"></span>
+                </div>
+                <div class="daten-zeile">
+                    <span class="label">Versicherung</span>
+                    <span class="wert" id="check-versicherung"></span>
+                </div>
+                <div class="daten-zeile">
+                    <span class="label">Monatliches Budget</span>
+                    <span class="wert" id="check-budget"></span>
+                </div>
+            </div>
+            <div class="bestaetigung-knopfe">
+                <button class="btn btn-primary" onclick="zeigeAbschluss()">✓ Ja, alles richtig</button>
+                <button class="btn btn-danger" onclick="zeigeFrage(1)">✗ Nein, korrigieren</button>
+            </div>
+        </div>
+
+        <!-- Abschluss -->
         <div id="abschluss">
             <div class="checkmark">✅</div>
             <h2>Vielen Dank, <span id="abschluss-name"></span>!</h2>
@@ -283,9 +346,9 @@
         <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
     </div>
 
-    <!-- About Us -->
+    <!-- Zu uns -->
     <div id="about-us-bereich">
-        <h2>Über uns</h2>
+        <h2>Zu uns</h2>
 
         <div class="about-karte">
             <span class="icon">⏱️</span>
@@ -297,6 +360,14 @@
             <span class="icon">♛</span>
             <p><strong>Trotz des Namens ist Kunde König.</strong><br>
             Bei uns steht nicht unser Name im Mittelpunkt — sondern Sie. Jeder Kunde wird bei uns mit höchster Priorität behandelt.</p>
+        </div>
+
+        <div class="about-karte">
+            <span class="icon">👥</span>
+            <p><strong>Die Ersteller</strong><br><br>
+            Viktor König<br>
+            Stefan König<br>
+            Christina Frese</p>
         </div>
 
         <div class="about-zitat">
@@ -330,17 +401,39 @@
         function zeigeFrage(nr) {
             document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
             document.getElementById('abschluss').style.display = 'none';
+            document.getElementById('bestaetigung').style.display = 'none';
 
             if (nr <= 5) {
                 document.getElementById('frage' + nr).classList.add('aktiv');
                 document.getElementById('fortschritt').innerText = 'Schritt ' + nr + ' von 5';
                 document.getElementById('fortschritt').style.display = 'block';
-            } else {
-                document.getElementById('fortschritt').style.display = 'none';
-                document.getElementById('abschluss').style.display = 'block';
-                const nachname = document.getElementById('nachname-input').value;
-                document.getElementById('abschluss-name').innerText = nachname;
             }
+        }
+
+        function zeigeBestaetigung() {
+            document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
+            document.getElementById('fortschritt').style.display = 'none';
+
+            const vorname = document.getElementById('vorname-input').value.trim();
+            const nachname = document.getElementById('nachname-input').value.trim();
+            const alter = document.getElementById('alter-input').value;
+            const email = document.getElementById('email-input').value.trim();
+            const budget = document.getElementById('range-input').value;
+
+            document.getElementById('check-name').innerText = vorname + ' ' + nachname;
+            document.getElementById('check-alter').innerText = alter + ' Jahre';
+            document.getElementById('check-email').innerText = email;
+            document.getElementById('check-versicherung').innerText = gewaehlteVersicherung;
+            document.getElementById('check-budget').innerText = budget + ' € / Monat';
+
+            document.getElementById('bestaetigung').style.display = 'block';
+        }
+
+        function zeigeAbschluss() {
+            document.getElementById('bestaetigung').style.display = 'none';
+            document.getElementById('abschluss').style.display = 'block';
+            const nachname = document.getElementById('nachname-input').value.trim();
+            document.getElementById('abschluss-name').innerText = nachname;
         }
 
         function weiter(nr) {
@@ -375,6 +468,7 @@
                 const aktiv = document.querySelector('.frage.aktiv');
                 if (aktiv) {
                     const nr = parseInt(aktiv.id.replace('frage', ''));
+                    if (nr === 5) { zeigeBestaetigung(); return; }
                     if (nr !== 4) weiter(nr);
                 }
             }
