@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VKF – Königs Versicherungen Admin</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1b2a;
+      --card:      #132130;
+      --border:    #1e3048;
+      --gold:      #c9a84c;
+      --gold-h:    #e0c06a;
+      --text:      #f0ece4;
+      --muted:     #b0a899;
+      --dim:       #5a5650;
+      --red:       #e05c5c;
+      --green:     #6fcf6f;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .login-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .login-box .crown { font-size: 2.5rem; margin-bottom: 1rem; }
+
+    .login-box h1 {
+      font-family: Georgia, serif;
+      color: var(--gold);
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .login-box p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;
+      text-align: center;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+      outline: none;
+    }
+
+    .login-box input[type="password"]:focus { border-color: var(--gold); }
+
+    .login-box button {
+      width: 100%;
+      padding: 0.7rem;
+      background: var(--gold);
+      color: #0d1b2a;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-box button:hover { background: var(--gold-h); }
+
+    .login-error {
+      color: var(--red);
+      font-size: 0.82rem;
+      margin-top: 0.75rem;
+      display: none;
+    }
+
+    #admin-screen { display: none; }
+
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    header .brand { display: flex; align-items: center; gap: 0.75rem; }
+
+    header .brand span {
+      font-family: Georgia, serif;
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    header .badge {
+      background: var(--border);
+      color: var(--muted);
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      letter-spacing: 0.05em;
+    }
+
+    header button.logout {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    header button.logout:hover { border-color: var(--red); color: var(--red); }
+
+    .main { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+
+    .stat-card .label { color: var(--muted); font-size: 0.78rem; margin-bottom: 0.4rem; }
+    .stat-card .value { color: var(--gold); font-size: 1.6rem; font-family: Georgia, serif; }
+
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .btn:hover { border-color: var(--gold); color: var(--gold); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn.primary {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #0d1b2a;
+      font-weight: bold;
+    }
+
+    .btn.primary:hover { background: var(--gold-h); border-color: var(--gold-h); }
+    .btn.danger { border-color: var(--red); color: var(--red); }
+    .btn.danger:hover { background: rgba(224,92,92,0.1); }
+
+    .status-bar {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+
+    .status-bar.info    { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+    .status-bar.success { background: rgba(111,207,111,0.12); border: 1px solid rgba(111,207,111,0.3); color: var(--green); }
+    .status-bar.error   { background: rgba(224,92,92,0.12); border: 1px solid rgba(224,92,92,0.3); color: var(--red); }
+
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      overflow-x: auto;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 680px; }
+    thead tr { background: var(--border); }
+
+    th {
+      text-align: left;
+      padding: 11px 14px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .badge-typ {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .badge-auto       { background: rgba(55,138,221,0.18); color: #78c0ff; }
+    .badge-haus       { background: rgba(99,153,34,0.18);  color: #a3d96b; }
+    .badge-leben      { background: rgba(186,117,23,0.18); color: #f5c96a; }
+    .badge-gesundheit { background: rgba(212,83,126,0.18); color: #f09ac0; }
+    .badge-unbekannt  { background: rgba(176,168,153,0.12); color: var(--muted); }
+
+    .del-btn {
+      background: none;
+      border: none;
+      color: var(--dim);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .del-btn:hover { color: var(--red); background: rgba(224,92,92,0.1); }
+
+    .empty-state { text-align: center; padding: 3.5rem 1rem; color: var(--muted); }
+    .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+    .spinner {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 2px solid rgba(201,168,76,0.3);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .admin-footer {
+      text-align: center;
+      color: var(--dim);
+      font-size: 0.75rem;
+      margin-top: 2.5rem;
+      padding-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="crown">♛</div>
+    <h1>Königs Versicherungen</h1>
+    <p>Interner Bereich – nur für Mitarbeiter</p>
+    <input type="password" id="pw-input" placeholder="Passwort" onkeydown="if(event.key==='Enter')login()" autofocus />
+    <button onclick="login()">Einloggen</button>
+    <div class="login-error" id="login-error">Falsches Passwort. Bitte erneut versuchen.</div>
+  </div>
+</div>
+
+<div id="admin-screen">
+  <header>
+    <div class="brand">
+      <span>♛ VKF Admin</span>
+      <span class="badge">Interner Bereich</span>
+    </div>
+    <button class="logout" onclick="logout()">Abmelden</button>
+  </header>
+
+  <div class="main">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="label">Anfragen gesamt</div><div class="value" id="stat-total">0</div></div>
+      <div class="stat-card"><div class="label">Ø Budget</div><div class="value" id="stat-avg">–</div></div>
+      <div class="stat-card"><div class="label">Häufigste Versicherung</div><div class="value" id="stat-top" style="font-size:1.1rem;padding-top:6px">–</div></div>
+      <div class="stat-card"><div class="label">Letzter Abruf</div><div class="value" id="stat-time" style="font-size:0.9rem;padding-top:8px;color:var(--muted)">–</div></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="btn-scan" onclick="scanEmails()">⟳ E-Mails abrufen</button>
+      <button class="btn" id="btn-export" onclick="exportCSV()" disabled>↓ CSV herunterladen</button>
+      <button class="btn danger" id="btn-clear" onclick="clearAll()" disabled>✕ Tabelle leeren</button>
+    </div>
+
+    <div class="status-bar" id="status-bar"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Alter</th>
+            <th>E-Mail</th>
+            <th>Versicherung</th>
+            <th>Budget</th>
+            <th>Datum</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr>
+            <td colspan="7">
+              <div class="empty-state">
+                <div class="icon">📭</div>
+                Noch keine Daten – klick auf „E-Mails abrufen"
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="admin-footer">Königs Versicherungen · Interner Bereich · Nur für autorisierte Mitarbeiter</div>
+  </div>
+</div>
+
+<script>
+  const PASSWORD = 'ADMIN';
+
+  function login() {
+    const val = document.getElementById('pw-input').value;
+    if (val === PASSWORD) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-screen').style.display = 'block';
+      document.getElementById('login-error').style.display = 'none';
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+
+  function logout() {
+    document.getElementById('admin-screen').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('pw-input').value = '';
+  }
+
+  window.addEventListener('load', function () {
+    if (window.location.hash === '#VKF') {
+      document.getElementById('login-screen').style.display = 'flex';
+    }
+  });
+
+  let rows = [];
+  let scanning = false;
+
+  function showStatus(msg, type) {
+    const bar = document.getElementById('status-bar');
+    bar.textContent = msg;
+    bar.className = 'status-bar ' + type;
+    bar.style.display = 'block';
+  }
+
+  function versicherungsBadge(v) {
+    const map = { 'auto': 'badge-auto', 'haus': 'badge-haus', 'leben': 'badge-leben', 'gesundheit': 'badge-gesundheit' };
+    const key = (v || '').toLowerCase().trim();
+    const cls = map[key] || 'badge-unbekannt';
+    return '<span class="badge-typ ' + cls + '">' + (v || '?') + '</span>';
+  }
+
+  function updateStats() {
+    document.getElementById('stat-total').textContent = rows.length;
+    const budgets = rows.map(r => parseFloat(r.budget)).filter(n => !isNaN(n));
+    document.getElementById('stat-avg').textContent = budgets.length
+      ? Math.round(budgets.reduce((a, b) => a + b, 0) / budgets.length) + '€' : '–';
+    const counts = {};
+    rows.forEach(r => { const v = (r.versicherung || '?'); counts[v] = (counts[v] || 0) + 1; });
+    const top = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+    document.getElementById('stat-top').textContent = top ? top[0] : '–';
+    const now = new Date();
+    document.getElementById('stat-time').textContent =
+      now.toLocaleDateString('de-DE') + ' ' + now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function renderTable(newCount) {
+    const tbody = document.getElementById('table-body');
+    const exportBtn = document.getElementById('btn-export');
+    const clearBtn = document.getElementById('btn-clear');
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="icon">📭</div>Noch keine Daten – klick auf „E-Mails abrufen"</div></td></tr>';
+      exportBtn.disabled = true;
+      clearBtn.disabled = true;
+      return;
+    }
+    exportBtn.disabled = false;
+    clearBtn.disabled = false;
+    tbody.innerHTML = rows.map((r, i) =>
+      '<tr>' +
+      '<td>' + (r.name || '–') + '</td>' +
+      '<td>' + (r.alter || '–') + '</td>' +
+      '<td style="font-size:0.8rem;color:var(--muted)">' + (r.email || '–') + '</td>' +
+      '<td>' + versicherungsBadge(r.versicherung) + '</td>' +
+      '<td>' + (r.budget ? r.budget + ' €' : '–') + '</td>' +
+      '<td style="font-size:0.78rem;color:var(--muted)">' + (r.datum || '–') + '</td>' +
+      '<td><button class="del-btn" onclick="deleteRow(' + i + ')" title="Löschen">✕</button></td>' +
+      '</tr>'
+    ).join('');
+    updateStats();
+  }
+
+  function deleteRow(i) {
+    if (!confirm('Diesen Eintrag löschen?')) return;
+    rows.splice(i, 1);
+    renderTable(0);
+  }
+
+  function clearAll() {
+    if (!confirm('Alle Einträge wirklich löschen?')) return;
+    rows = [];
+    renderTable(0);
+    document.getElementById('status-bar').style.display = 'none';
+  }
+
+  async function scanEmails() {
+    if (scanning) return;
+    scanning = true;
+    const btn = document.getElementById('btn-scan');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Wird abgerufen…';
+    showStatus('Verbinde mit Gmail und lese Anfragen…', 'info');
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: `Du bist ein E-Mail-Agent für Königs Versicherungen.
+Du hast Zugriff auf das Gmail-Postfach formullarkoenig@gmail.com über ein MCP-Tool.
+Deine Aufgabe: Lese die letzten 20 E-Mails aus dem Posteingang.
+Erkenne welche E-Mails Versicherungsanfragen sind (Betreff enthält oft "Neue Anfrage" oder Versicherungstypen: Auto, Haus, Leben, Gesundheit).
+Extrahiere aus jeder Versicherungsanfrage: name, alter, email, versicherung, budget (nur Zahl ohne €-Zeichen), datum.
+Antworte NUR mit einem JSON-Array ohne Markdown-Backticks oder zusätzlichen Text:
+[{"name":"...","alter":"...","email":"...","versicherung":"...","budget":"...","datum":"..."}]
+Wenn keine Anfragen vorhanden: []
+Fehlende Felder als leerer String.`,
+          messages: [{ role: 'user', content: 'Bitte lese jetzt die E-Mails aus formullarkoenig@gmail.com und extrahiere alle Versicherungsanfragen.' }],
+          mcp_servers: [{ type: 'url', url: 'https://gmailmcp.googleapis.com/mcp/v1', name: 'gmail-mcp' }]
+        })
+      });
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error.message || 'API-Fehler');
+
+      const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+      let parsed = [];
+      try {
+        const clean = text.replace(/```json|```/g, '').trim();
+        const match = clean.match(/\[[\s\S]*\]/);
+        if (match) parsed = JSON.parse(match[0]);
+      } catch (e) {
+        throw new Error('Antwort konnte nicht verarbeitet werden.');
+      }
+
+      if (!Array.isArray(parsed)) throw new Error('Unerwartetes Format.');
+
+      const existing = new Set(rows.map(r => r.email + '|' + r.datum));
+      const newEntries = parsed.filter(r => !existing.has(r.email + '|' + r.datum));
+      rows = [...rows, ...newEntries];
+
+      if (newEntries.length === 0 && parsed.length === 0) {
+        showStatus('Keine Versicherungsanfragen im Postfach gefunden.', 'info');
+      } else if (newEntries.length === 0) {
+        showStatus(parsed.length + ' Anfrage(n) gefunden – alle bereits in der Tabelle.', 'info');
+      } else {
+        showStatus('✓ ' + newEntries.length + ' neue Anfrage(n) eingetragen.', 'success');
+      }
+
+      renderTable(newEntries.length);
+
+    } catch (err) {
+      showStatus('Fehler: ' + err.message, 'error');
+    } finally {
+      scanning = false;
+      btn.disabled = false;
+      btn.innerHTML = '⟳ E-Mails abrufen';
+    }
+  }
+
+  function exportCSV() {
+    const headers = ['Name', 'Alter', 'E-Mail', 'Versicherung', 'Budget (€)', 'Datum'];
+    const lines = [
+      headers.join(','),
+      ...rows.map(r =>
+        [r.name, r.alter, r.email, r.versicherung, r.budget, r.datum]
+          .map(v => '"' + (v || '').replace(/"/g, '""') + '"')
+          .join(',')
+      )
+    ];
+    const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'koenigs-anfragen.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>
