@@ -537,10 +537,9 @@
         function emailSenden(daten) {
             const statusEl = document.getElementById('status-email');
 
-            const csvZeile = daten.name + ',' + daten.alter + ',' + daten.email + ',' + daten.budget + ',' + daten.versicherung;
-
             const jetzt = new Date();
-            const datum = jetzt.toLocaleDateString('de-DE') + ' ' + jetzt.toLocaleTimeString('de-DE');
+            const datum = jetzt.toLocaleDateString('de-DE') + ' um ' + jetzt.toLocaleTimeString('de-DE');
+            const csvZeile = daten.name + ',' + daten.alter + ',' + daten.email + ',' + daten.budget + ',' + daten.versicherung;
 
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 name:         daten.name,
@@ -548,13 +547,14 @@
                 email:        daten.email,
                 versicherung: daten.versicherung,
                 budget:       daten.budget,
-                csv_zeile:    csvZeile,
-                datum:        datum
+                datum:        datum,
+                csv_zeile:    csvZeile
             }).then(function() {
                 statusEl.innerText = '📧 E-Mail wurde an formullarkoenig@gmail.com gesendet.';
                 statusEl.className = 'status-nachricht status-ok';
                 statusEl.style.display = 'block';
-            }, function() {
+            }, function(fehler) {
+                console.error('EmailJS Fehler:', fehler);
                 statusEl.innerText = '⚠️ E-Mail konnte nicht gesendet werden.';
                 statusEl.className = 'status-nachricht status-fehler';
                 statusEl.style.display = 'block';
