@@ -75,22 +75,28 @@
             width: 100%;
         }
 
-        #formular-bereich h2 {
+        .frage { display: none; }
+        .frage.aktiv { display: block; }
+
+        .frage h2 {
             font-size: 1.8rem;
             color: #c9a84c;
             margin-bottom: 1.5rem;
         }
 
-        #alter-input {
+        .frage input[type="text"],
+        .frage input[type="number"],
+        .frage input[type="email"] {
             font-size: 1.1rem;
             padding: 0.7rem 1.2rem;
             border-radius: 4px;
             border: 2px solid #c9a84c;
             background: #0d1b2a;
             color: #f0ece4;
-            width: 220px;
+            width: 280px;
             text-align: center;
             outline: none;
+            font-family: Arial;
         }
 
         .versicherung-knopf {
@@ -106,7 +112,34 @@
             transition: all 0.2s ease;
         }
 
-        .versicherung-knopf:hover { background: #f0ece4; color: #0d1b2a; }
+        .versicherung-knopf:hover,
+        .versicherung-knopf.ausgewaehlt { background: #c9a84c; border-color: #c9a84c; color: #0d1b2a; }
+
+        .range-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .range-container input[type="range"] {
+            width: 280px;
+            accent-color: #c9a84c;
+        }
+
+        .range-wert {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #c9a84c;
+            font-family: Arial;
+        }
+
+        .fortschritt {
+            font-family: Arial;
+            font-size: 0.85rem;
+            color: #5a5650;
+            margin-bottom: 1.5rem;
+        }
 
         .zurueck {
             margin-top: 2rem;
@@ -118,6 +151,12 @@
             background: none;
             border: none;
         }
+
+        /* Abschluss */
+        #abschluss { display: none; }
+        #abschluss .checkmark { font-size: 4rem; margin-bottom: 1rem; }
+        #abschluss h2 { font-size: 1.8rem; color: #c9a84c; margin-bottom: 1rem; }
+        #abschluss p { font-family: Arial; color: #b0a899; font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -136,21 +175,68 @@
     <!-- Formular -->
     <div id="formular-bereich">
 
-        <div id="frage1">
-            <h2>Wie alt sind Sie?</h2>
-            <input id="alter-input" type="number" min="1" max="120" placeholder="Ihr Alter eingeben...">
+        <!-- Fortschritt -->
+        <p class="fortschritt" id="fortschritt">Schritt 1 von 5</p>
+
+        <!-- Frage 1: Name -->
+        <div class="frage aktiv" id="frage1">
+            <h2>Wie heißen Sie?</h2>
+            <input type="text" id="vorname-input" placeholder="Vorname">
             <br><br>
-            <button class="btn btn-primary" onclick="zeigeFrage2()">Weiter →</button>
+            <input type="text" id="nachname-input" placeholder="Nachname">
+            <br><br>
+            <button class="btn btn-primary" onclick="weiter(1)">Weiter →</button>
         </div>
 
-        <div id="frage2" style="display:none;">
-            <h2>Was möchten Sie versichern?</h2>
+        <!-- Frage 2: Alter -->
+        <div class="frage" id="frage2">
+            <h2>Wie alt sind Sie?</h2>
+            <input type="number" id="alter-input" min="1" max="120" placeholder="Ihr Alter">
+            <br><br>
+            <button class="btn btn-primary" onclick="weiter(2)">Weiter →</button>
+        </div>
+
+        <!-- Frage 3: E-Mail -->
+        <div class="frage" id="frage3">
+            <h2>Was ist Ihre E-Mail Adresse?</h2>
+            <input type="email" id="email-input" placeholder="ihre@email.de">
+            <br><br>
+            <button class="btn btn-primary" onclick="weiter(3)">Weiter →</button>
+        </div>
+
+        <!-- Frage 4: Versicherung -->
+        <div class="frage" id="frage4">
+            <h2>Was wollen Sie versichern?</h2>
             <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-                <button class="versicherung-knopf" onclick="waehleVersicherung('Auto')">🚗 Auto</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung('Haus')">🏠 Haus</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung('Leben')">❤️ Leben</button>
-                <button class="versicherung-knopf" onclick="waehleVersicherung('Gesundheit')">🏥 Gesundheit</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Auto')">🚗 Auto</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Haus')">🏠 Haus</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Leben')">❤️ Leben</button>
+                <button class="versicherung-knopf" onclick="waehleVersicherung(this, 'Gesundheit')">🏥 Gesundheit</button>
             </div>
+            <br>
+            <button class="btn btn-primary" id="weiter4" onclick="weiter(4)" style="display:none;">Weiter →</button>
+        </div>
+
+        <!-- Frage 5: Price Range -->
+        <div class="frage" id="frage5">
+            <h2>Was ist Ihre monatliche Budget?</h2>
+            <div class="range-container">
+                <div class="range-wert" id="range-anzeige">50 €</div>
+                <input type="range" id="range-input" min="10" max="500" step="10" value="50"
+                    oninput="document.getElementById('range-anzeige').innerText = this.value + ' €'">
+                <div style="display:flex; justify-content:space-between; width:280px; font-family:Arial; font-size:0.85rem; color:#5a5650;">
+                    <span>10 €</span><span>500 €</span>
+                </div>
+            </div>
+            <br><br>
+            <button class="btn btn-primary" onclick="weiter(5)">Weiter →</button>
+        </div>
+
+        <!-- Abschluss -->
+        <div id="abschluss">
+            <div class="checkmark">✅</div>
+            <h2>Vielen Dank, <span id="abschluss-name"></span>!</h2>
+            <p>Wir melden uns in weniger als 1 Stunde bei Ihnen.</p>
         </div>
 
         <button class="zurueck" onclick="zeigeSeite('start')">← Zurück zur Startseite</button>
@@ -159,44 +245,80 @@
     <footer>&copy; 2026 Königs. Alle Rechte vorbehalten.</footer>
 
     <script>
+        let gewaehlteVersicherung = '';
+
         function zeigeSeite(seite) {
             document.getElementById('startseite').style.display = 'none';
             document.getElementById('formular-bereich').style.display = 'none';
 
             if (seite === 'formular') {
                 document.getElementById('formular-bereich').style.display = 'block';
-                document.getElementById('frage1').style.display = 'block';
-                document.getElementById('frage2').style.display = 'none';
+                zeigeFrage(1);
             } else {
                 document.getElementById('startseite').style.display = 'block';
             }
         }
 
-        // Beim Laden der Seite Hash prüfen
+        function zeigeFrage(nr) {
+            document.querySelectorAll('.frage').forEach(f => f.classList.remove('aktiv'));
+            document.getElementById('abschluss').style.display = 'none';
+
+            if (nr <= 5) {
+                document.getElementById('frage' + nr).classList.add('aktiv');
+                document.getElementById('fortschritt').innerText = 'Schritt ' + nr + ' von 5';
+                document.getElementById('fortschritt').style.display = 'block';
+            } else {
+                document.getElementById('fortschritt').style.display = 'none';
+                document.getElementById('abschluss').style.display = 'block';
+                const nachname = document.getElementById('nachname-input').value;
+                document.getElementById('abschluss-name').innerText = nachname;
+            }
+        }
+
+        function weiter(nr) {
+            if (nr === 1) {
+                const vorname = document.getElementById('vorname-input').value.trim();
+                const nachname = document.getElementById('nachname-input').value.trim();
+                if (!vorname || !nachname) { alert('Bitte geben Sie Vor- und Nachname ein.'); return; }
+            }
+            if (nr === 2) {
+                const alter = document.getElementById('alter-input').value;
+                if (!alter || alter < 1 || alter > 120) { alert('Bitte geben Sie ein gültiges Alter ein.'); return; }
+            }
+            if (nr === 3) {
+                const email = document.getElementById('email-input').value.trim();
+                if (!email || !email.includes('@')) { alert('Bitte geben Sie eine gültige E-Mail ein.'); return; }
+            }
+            if (nr === 4) {
+                if (!gewaehlteVersicherung) { alert('Bitte wählen Sie eine Versicherung.'); return; }
+            }
+            zeigeFrage(nr + 1);
+        }
+
+        function waehleVersicherung(knopf, typ) {
+            document.querySelectorAll('.versicherung-knopf').forEach(k => k.classList.remove('ausgewaehlt'));
+            knopf.classList.add('ausgewaehlt');
+            gewaehlteVersicherung = typ;
+            document.getElementById('weiter4').style.display = 'inline-block';
+        }
+
+        // Enter-Taste
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const aktiv = document.querySelector('.frage.aktiv');
+                if (aktiv) {
+                    const nr = parseInt(aktiv.id.replace('frage', ''));
+                    if (nr !== 4) weiter(nr);
+                }
+            }
+        });
+
+        // Hash beim Laden prüfen
         window.addEventListener('load', function () {
             if (window.location.hash === '#formular') {
                 zeigeSeite('formular');
             }
         });
-
-        // Enter-Taste bei Alter
-        document.getElementById('alter-input').addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') zeigeFrage2();
-        });
-
-        function zeigeFrage2() {
-            const alter = document.getElementById('alter-input').value;
-            if (!alter || alter < 1 || alter > 120) {
-                alert('Bitte geben Sie ein gültiges Alter ein.');
-                return;
-            }
-            document.getElementById('frage1').style.display = 'none';
-            document.getElementById('frage2').style.display = 'block';
-        }
-
-        function waehleVersicherung(typ) {
-            alert('Sie haben ' + typ + ' gewählt! Wir melden uns bald bei Ihnen.');
-        }
     </script>
 
 </body>
